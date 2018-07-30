@@ -1,7 +1,7 @@
 {
-  "name": "client",
+  "name": "hstone-client",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.4.1",
@@ -9,11 +9,19 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4"
   },
+  "keywords": [
+    "hearthstone",
+    "addiction",
+    "gaming"
+  ],
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
+  "author": "Julius G. Dorfman",
+
   "proxy": "http://localhost:8080/"
 }
+
