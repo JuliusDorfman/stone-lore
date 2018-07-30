@@ -17,23 +17,26 @@ router.get('/test', (req, res) => {
 
 
 /*
- * @Route GET /api/routes/murloc
- * @Desc GET murloc
+ * @Route GET /api/routes/:races
+ * @Desc GET race
  * @Access Public
  */
 
-router.get('/murloc', (req, res) => {
-  axios.get('https://omgvamp-hearthstone-v1.p.mashape.com/cards/races/Murloc', {
+router.get('/races/:race', (req, res) => {
+  axios.get(`https://omgvamp-hearthstone-v1.p.mashape.com/cards/races/${req.params.race}`, {
       headers: {
         "X-Mashape-Authorization": 'Das4135R2Smsh5AbDKdQdqYDjURDp1WKsN8jsnETmcfXMAhtjN'
       }
     })
     .then(result => {
-      // console.log("Murloc Route from routes.js", result)
       return res.json({
-        murlocGet: result.data
+        raceGet: result.data
       })
+    }).catch(err => {
+      console.log("Races Get Error: " + err)
     })
 })
+
+
 
 module.exports = router;

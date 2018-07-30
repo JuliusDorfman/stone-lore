@@ -1,13 +1,28 @@
-.navbar {
-  text-align: right;
-
+.form-container {
+  width: 400px;
+  margin-top: 100px;
 }
 
-.navbar > li {
+form {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.result-list {
+  display: grid;
+  padding: 0;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.result-list>li {
+  list-style: none;
   display: inline-block;
-  margin-left: 20px;
 }
 
-.navbar > li > a {
-  color: gray;
+.result-list>li>h4 {
+  margin: 0;
+}
+
+.result-list>li>img {
+  height: 250px;
 }

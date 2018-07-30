@@ -7,61 +7,90 @@ export default class Homepage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      testRoute: '',
-      submitVal: '',
-      returnVal: ''
+      raceValue: '',
+      costValue: '',
+      healthValue: '',
+      attackValue: '',
+      rarityValue: '',
+      returnVal: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   componentDidMount() {
-    // @Route 
-    axios.get('/api/routes/test').then(res => {
-      console.log("Test route called from react client")
-      return "Test Route Called"
-    }).then(result => {
-      this.setState({ testRoute: result })
+    // @Route Test Route
+    axios.get('/api/routes/test').then(result => {
+      console.log(result)
     })
   }
 
 
   handleChange(e) {
-    this.setState({ submitVal: e.target.value })
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   handleSubmit(e) {
-    console.log(`e\xa0` + this.state.submitVal)
-  }
-
-  handleKeyPress(e) {
-    if (e.key === 'Enter') {
-      console.log(`e\xa0` + this.state.submitVal)
-      this.getCard()
-    }
+    e.preventDefault();
+    this.getCard();
   }
 
   getCard(e) {
-    let card = this.state.submitVal;
-    axios.get('/api/routes/murloc').then(res => {
-      this.setState({ returnVal: res.data }, ()=> {
+    let raceValue = this.state.raceValue;
+    let costValue = this.state.costValue;
+    axios.get(`/api/routes/races/${raceValue}`).then(res => {
+      this.setState({ returnVal: res.data.raceGet }, () => {
         console.log(this.state.returnVal)
       })
     })
+    console.log(this.state)
   }
 
   render() {
     return (
       <div className="homepage-page">
         <Header />
-        Homepage
+        <h1>Homepage</h1>
         <div className="container">
-          {this.state.testRoute}
         </div>
-        <input type="text" name="search" placeholder="card" onChange={this.handleChange} onKeyPress={this.handleKeyPress} />
-        <input type="submit" name="search" value="submit" onClick={this.handleSubmit} />
-        {/* {this.state.returnVal} */}
+
+        <div className="container form-container">
+          <form className="search-form">
+            <label htmlFor="raceValue">Race</label>
+            <input type="text" name="raceValue" placeholder="e.g. Murloc/Demon/Dragon/ect..." onChange={this.handleChange} autoComplete="off" />
+            <label htmlFor="costValue">Cost</label>
+            <input type="text" name="costValue" placeholder="Integer" onChange={this.handleChange} autoComplete="off" />
+            <label htmlFor="healthValue">Health</label>
+            <input type="text" name="healthValue" placeholder="Integer" onChange={this.handleChange} autoComplete="off" />
+            <label htmlFor="attackValue">Attack</label>
+            <input type="text" name="attackValue" placeholder="Integer" onChange={this.handleChange} autoComplete="off" />
+            <label htmlFor="rarityValue">Rarity</label>
+            <input type="text" name="rarityValue" placeholder="e.g. Common/Rare/Epic/Legendary" onChange={this.handleChange} autoComplete="off" />
+            <hr />
+            <button type="submit" name="search" value="Submit" onClick={this.handleSubmit}>Submit</button>
+          </form>
+        </div>
+
+        <div className="container img-container">
+          {
+            this.state.returnVal
+              ?
+              <ul className="result-list">
+                {this.state.returnVal.map((result, index) => {
+                  return (
+                    <li>
+                      <h4>{result.name}</h4>
+                      <img src={result.imgGold} key={result.cardId} alt={result.name} />
+                    </li>
+                  )
+                })
+                }
+              </ul>
+              :
+              <span />
+          }
+        </div>
+
       </div>
     )
   }

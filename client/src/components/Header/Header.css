@@ -1,0 +1,18 @@
+.navbar {
+  text-align: right;
+}
+
+.navbar>li {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.navbar>li>a {
+  color: gray;
+}
+
+.hstone-logo>img {
+  position: absolute;
+  left: 20px;
+  height: 150px;
+}
