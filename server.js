@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 8080;
 const path = require('path');
 const bodyParser = require('body-parser');
 
@@ -10,20 +9,19 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-
+// Initialize routes folder
 const stoneRoutes = require('./api/routes');
 app.use('/api/routes', stoneRoutes)
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(__dirname, 'client', 'build'));
-
+  app.use(express.static(__dirname, 'client', 'public'));
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html'));
   });
 }
 
-
+const port = process.env.PORT || 8080;
 app.listen(port,
   () =>
   console.log(`Listening on port ${port}`)
