@@ -18,8 +18,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn install && yarn run build"
+    "eject": "react-scripts eject"
   },
   "author": "Julius G. Dorfman",
   "bugs": {
