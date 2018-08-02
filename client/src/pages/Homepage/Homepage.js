@@ -60,12 +60,6 @@ export default class Homepage extends Component {
       if (completeCardListBySet.hasOwnProperty(nameOfSet)) {
         let singleSet = completeCardListBySet[nameOfSet];
 
-
-
-        // //@Desc Return all Sets
-        // console.log(`${nameOfSet} : `, singleSet);
-
-
         //@Desc Return a Single Card
         if (cardNameValue) {
           singleSet.forEach((singleCard, index) => {
@@ -158,7 +152,7 @@ export default class Homepage extends Component {
         <Header />
         <div className="container">
           <h1>Homepage</h1>
-          <p className="homepage-landing-intro"></p>
+          <p className="homepage-landing-intro">Crush your Addiction</p>
         </div>
 
         <div className="container form-container">
