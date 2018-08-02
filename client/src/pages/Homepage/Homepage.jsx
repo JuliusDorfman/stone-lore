@@ -158,6 +158,7 @@ export default class Homepage extends Component {
         <Header />
         <div className="container">
           <h1>Homepage</h1>
+          <p className="homepage-landing-intro"></p>
         </div>
 
         <div className="container form-container">
