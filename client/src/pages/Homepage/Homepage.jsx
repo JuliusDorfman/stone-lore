@@ -16,7 +16,8 @@ export default class Homepage extends Component {
       attackValue: '',
       rarityValue: '',
       setValue: '',
-      returnVal: []
+      returnVal: [],
+      imgError: "/assets/images/dog-shoveling-snow-hearthstone-hero.png"
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -51,10 +52,14 @@ export default class Homepage extends Component {
     let setValue = this.state.setValue;
     let returnVal = this.state.returnVal;
 
+    if (returnVal) {
+      this.setState({ returnVal: [] })
+    }
 
     for (let nameOfSet in completeCardListBySet) {
       if (completeCardListBySet.hasOwnProperty(nameOfSet)) {
         let singleSet = completeCardListBySet[nameOfSet];
+
 
 
         // //@Desc Return all Sets
@@ -83,6 +88,58 @@ export default class Homepage extends Component {
           singleSet.forEach((singleCard, index) => {
             console.log("race", singleCard.race)
             if (raceValue === singleCard.race) {
+              this.setState(prevState => ({
+                returnVal: [...prevState.returnVal, singleCard]
+              }))
+            }
+            console.log("returnVal", this.state.returnVal)
+          })
+        }
+
+        // @Desc This will Render all Card with value of COSTVALUE
+        if (costValue && !cardNameValue) {
+          singleSet.forEach((singleCard, index) => {
+            console.log("cost", singleCard.cost)
+            if (parseInt(costValue, 10) === parseInt(singleCard.cost, 10)) {
+              this.setState(prevState => ({
+                returnVal: [...prevState.returnVal, singleCard]
+              }))
+            }
+            console.log("returnVal", this.state.returnVal)
+          })
+        }
+
+        // @Desc This will Render all Card with value of AttackValue
+        if (attackValue && !cardNameValue) {
+          singleSet.forEach((singleCard, index) => {
+            console.log("attack", singleCard.attack)
+            if (parseInt(attackValue, 10) === parseInt(singleCard.attack, 10)) {
+              this.setState(prevState => ({
+                returnVal: [...prevState.returnVal, singleCard]
+              }))
+            }
+            console.log("returnVal", this.state.returnVal)
+          })
+        }
+
+        // @Desc This will Render all Card with value of HealthValue
+        if (healthValue && !cardNameValue) {
+          singleSet.forEach((singleCard, index) => {
+            console.log("health", singleCard.health)
+            if (parseInt(healthValue, 10) === parseInt(singleCard.health, 10)) {
+              this.setState(prevState => ({
+                returnVal: [...prevState.returnVal, singleCard]
+              }))
+            }
+            console.log("returnVal", this.state.returnVal)
+          })
+        }
+
+        // @Desc This will Render all Card with value of rarityValue
+        if (rarityValue && !cardNameValue) {
+          singleSet.forEach((singleCard, index) => {
+            console.log("rarity", singleCard.rarity)
+            if (rarityValue === singleCard.rarity) {
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
               }))
@@ -133,7 +190,7 @@ export default class Homepage extends Component {
                   return (
                     <li key={result.name + index}>
                       <h4>{result.name}</h4>
-                      <img src={result.img} key={result.cardId} alt={result.name} />
+                      <img src={result.img} key={result.cardId} alt={result.name} onError={(e) => e.target.src = this.state.imgError} />
                       <p>Set: {result.cardSet}</p>
                     </li>
                   )
