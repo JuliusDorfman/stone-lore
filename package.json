@@ -13,9 +13,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
+    "concurrently": "^3.6.1",
     "express": "^4.16.2"
-  },
-  "devDependencies": {
-    "concurrently": "^3.5.0"
   }
 }
