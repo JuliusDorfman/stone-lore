@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"PORT=8080 node server.js\"",
+    "start": "concurrently \"cd client && yarn start\" \"PORT=8080 node server.js\"",
     "heroku-postbuild": "cd client && yarn install && yarn install --only=dev --no-shrinkwrap && yarn run build",
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
