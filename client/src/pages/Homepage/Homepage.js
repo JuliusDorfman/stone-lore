@@ -86,8 +86,8 @@ export default class Homepage extends Component {
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
-            console.log("returnVal", this.state.returnVal)
           })
+          console.log("returnVal", this.state.returnVal)
         }
 
         // @Desc This will Render all Card with value of COSTVALUE
@@ -99,8 +99,8 @@ export default class Homepage extends Component {
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
-            console.log("returnVal", this.state.returnVal)
           })
+          console.log("returnVal", this.state.returnVal)
         }
 
         // @Desc This will Render all Card with value of AttackValue
@@ -112,8 +112,8 @@ export default class Homepage extends Component {
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
-            console.log("returnVal", this.state.returnVal)
           })
+          console.log("returnVal", this.state.returnVal)
         }
 
         // @Desc This will Render all Card with value of HealthValue
@@ -125,8 +125,8 @@ export default class Homepage extends Component {
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
-            console.log("returnVal", this.state.returnVal)
           })
+          console.log("returnVal", this.state.returnVal)
         }
 
         // @Desc This will Render all Card with value of rarityValue
@@ -138,8 +138,8 @@ export default class Homepage extends Component {
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
-            console.log("returnVal", this.state.returnVal)
           })
+          console.log("returnVal", this.state.returnVal)
         }
       }
     }
