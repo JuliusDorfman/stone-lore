@@ -10,15 +10,17 @@ class App extends Component {
     return (
       <div className="App">
       TEST
-        {/* <Router>
-          <div>
-            <Route exact path='/' component={Homepage} /> 
-            <Route exact path='/AboutMe' component={AboutMe} /> 
-          </div>
-        </Router> */}
       </div>
     );
   }
 }
 
 export default App;
+
+
+// <Router>
+// <div>
+//   <Route exact path='/' component={Homepage} /> 
+//   <Route exact path='/AboutMe' component={AboutMe} /> 
+// </div>
+// </Router>
