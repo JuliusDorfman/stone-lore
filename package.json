@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "concurrently \"cd client && yarn start\" \"PORT=8080 node server.js\"",
-    "heroku-postbuild": "cd client && yarn install && yarn install --only=dev --no-shrinkwrap && yarn run build",
+    "heroku-postbuild": "YARN_PRODUCTION=false cd client && yarn install && yarn install --only=dev --no-shrinkwrap && yarn run build",
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
