@@ -9,19 +9,17 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-
-// Serve static assets if in production
-if (process.env.NODE_ENV === 'production') {
-	app.use(express.static(path.resolve(__dirname, '/client/build')));
-	app.get('/*', (req, res) => {
-		res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
-	});
-}
-
 // Initialize routes folder
 const stoneRoutes = require('./api/routes');
 app.use('/api/routes', stoneRoutes)
 
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static(__dirname, '/client/build'));
+	app.get('/*', (req, res) => {
+		res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
+	});
+}
 
 const port = process.env.PORT || 8080;
 app.listen(port,
