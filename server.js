@@ -17,7 +17,7 @@ app.use('/api/routes', stoneRoutes)
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.resolve(__dirname, '/client/build')));
 	app.get('/*', (req, res) => {
-    res.set('Content-Type', 'application/json');
+    res.set('Content-Type', 'text/babel');
 		res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
 	});
 }
