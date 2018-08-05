@@ -14,6 +14,8 @@ form {
 
 .result-list {
   display: grid;
+  justify-content: center;
+  align-content: center;
   padding: 0;
   grid-template-columns: repeat(4, 1fr);
 }
@@ -21,6 +23,7 @@ form {
 .result-list>li {
   list-style: none;
   display: inline-block;
+  text-align: center;
 }
 
 .result-list>li>h4 {
@@ -28,6 +31,15 @@ form {
 }
 
 .result-list>li>img {
+  height: 250px;
+  transition: .75s;
+}
+
+.result-list>li>img:hover {
+  height: 350px;
+}
+
+.result-list>li>img.noHover:hover {
   height: 250px;
 }
 

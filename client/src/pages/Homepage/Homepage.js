@@ -17,10 +17,11 @@ export default class Homepage extends Component {
       rarityValue: '',
       setValue: '',
       returnVal: [],
-      imgError: "/assets/images/dog-shoveling-snow-hearthstone-hero.png"
+      imgError: "/assets/images/404-creature-hstone-light.png"
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleImageError = this.handleImageError.bind(this);
   }
 
   componentDidMount() {
@@ -39,6 +40,11 @@ export default class Homepage extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.getCards(e);
+  }
+
+  handleImageError(e) {
+   e.target.className = 'noHover'
+   console.log(e.target.className)
   }
 
   getCards(e) {
@@ -195,7 +201,11 @@ export default class Homepage extends Component {
                     <li key={result.name + index}>
                       <h4>{result.name}</h4>
                       {
-                        <img src={result.img} key={result.cardId} alt={result.name} onError={(e) => e.target.src = this.state.imgError} />
+                        <img src={result.img} key={result.cardId} alt={result.name} onError={(e) => {
+                          this.handleImageError(e)
+                          e.target.src = this.state.imgError;
+                        }
+                        } />
                       }
                       <p>Set: {result.cardSet}</p>
                       <p>Rarity: {result.rarity ? result.rarity : "Non Collectable"}</p>
