@@ -4,7 +4,7 @@ import './Header.css';
 export default class Header extends Component {
   render() {
     return (
-      <div>
+      <div className="header-component">
         <header>
           <div className="hstone-logo"><img src="/assets/images/stairs.png" alt="site-logo"/></div>
           <div className="container">

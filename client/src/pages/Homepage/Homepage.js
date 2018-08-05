@@ -33,7 +33,7 @@ export default class Homepage extends Component {
   }
 
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState({ [e.target.name]: e.target.value.toLowerCase() })
   }
 
   handleSubmit(e) {
@@ -63,7 +63,7 @@ export default class Homepage extends Component {
         //@Desc Return a Single Card
         if (cardNameValue) {
           singleSet.forEach((singleCard, index) => {
-            if (cardNameValue === singleCard.name) {
+            if (cardNameValue === singleCard.name.toLowerCase()) {
               this.setState({ returnVal: [singleSet[index]] })
             }
           })
@@ -71,17 +71,23 @@ export default class Homepage extends Component {
 
         //@Desc This will Render a Single Set
         if (nameOfSet && !cardNameValue) {
-          if (nameOfSet === setValue) {
+          console.log(nameOfSet)
+          console.log("setValue", setValue)
+          if (setValue === nameOfSet.toLocaleLowerCase()) {
             this.setState({ returnVal: singleSet },
-              console.log(nameOfSet, singleSet))
+              console.log(nameOfSet, singleSet)
+            )
           }
         }
 
         //@Desc This will Render all Races
         if (raceValue && !cardNameValue) {
           singleSet.forEach((singleCard, index) => {
+            if (singleCard.race === undefined) {
+              return null
+            }
             console.log("race", singleCard.race)
-            if (raceValue === singleCard.race) {
+            if (raceValue === singleCard.race.toLowerCase()) {
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
               }))
@@ -132,8 +138,11 @@ export default class Homepage extends Component {
         // @Desc This will Render all Card with value of rarityValue
         if (rarityValue && !cardNameValue) {
           singleSet.forEach((singleCard, index) => {
+            if (singleCard.rarity === undefined) {
+              return null
+            }
             console.log("rarity", singleCard.rarity)
-            if (rarityValue === singleCard.rarity) {
+            if (rarityValue === singleCard.rarity.toLowerCase()) {
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
               }))
@@ -150,7 +159,7 @@ export default class Homepage extends Component {
       <div className="homepage-page">
 
         <Header />
-        <div className="container">
+        <div className="container homepage-landing-header">
           <h1>Homepage</h1>
           <p className="homepage-landing-intro">Crush your Addiction</p>
         </div>
@@ -185,8 +194,11 @@ export default class Homepage extends Component {
                   return (
                     <li key={result.name + index}>
                       <h4>{result.name}</h4>
-                      <img src={result.img} key={result.cardId} alt={result.name} onError={(e) => e.target.src = this.state.imgError} />
+                      {
+                        <img src={result.img} key={result.cardId} alt={result.name} onError={(e) => e.target.src = this.state.imgError} />
+                      }
                       <p>Set: {result.cardSet}</p>
+                      <p>Rarity: {result.rarity ? result.rarity : "Non Collectable"}</p>
                     </li>
                   )
                 })

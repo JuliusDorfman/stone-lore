@@ -8,6 +8,10 @@ form {
   grid-template-columns: 1fr 2fr;
 }
 
+.homepage-landing-header {
+  text-align: center;
+}
+
 .result-list {
   display: grid;
   padding: 0;
@@ -25,4 +29,8 @@ form {
 
 .result-list>li>img {
   height: 250px;
+}
+
+.result-list p {
+  margin: 10px auto;
 }
