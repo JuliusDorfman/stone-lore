@@ -1,0 +1,16 @@
+.deck-component {
+  display: fixed;
+  position: absolute;
+  right: 0;
+  height: 80vh;
+  width: 120px;
+  border: 1px solid rgba(112, 57, 18);
+  background: rgba(243, 187, 90, .3);
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+aside > p {
+  text-align: center;
+  color: rgba(130, 49, 20, 1);
+}

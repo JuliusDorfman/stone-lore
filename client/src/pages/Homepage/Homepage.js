@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../../components/Header';
+import Deck from '../../components/Deck';
 import axios from 'axios';
 import './Homepage.css';
 
@@ -165,6 +166,7 @@ export default class Homepage extends Component {
       <div className="homepage-page">
 
         <Header />
+        <Deck />
         <div className="container homepage-landing-header">
           <h1>Homepage</h1>
           <p className="homepage-landing-intro">Crush your Addiction</p>

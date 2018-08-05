@@ -1,6 +1,10 @@
 .form-container {
-  width: 400px;
+  display: inline-block;
   margin-top: 100px;
+  padding: 30px;
+  border-radius: 12px;
+  background: rgba(243, 187, 90, .3);
+  border: 1px solid rgba(112, 57, 18);
 }
 
 form {
@@ -9,7 +13,25 @@ form {
 }
 
 .homepage-landing-header {
+  color: rgba(90, 49, 20, 1);
   text-align: center;
+}
+
+.search-form {
+  width: 400px;
+}
+
+.search-form > label {
+  color: rgba(130, 49, 20, 1);
+}
+
+.search-form > input {
+  background: rgba(253, 249, 243, 1);
+  color: rgba(164, 69, 30, 1);
+}
+
+.search-form > input::placeholder {
+  color: rgba(164, 69, 30, 1);
 }
 
 .result-list {
