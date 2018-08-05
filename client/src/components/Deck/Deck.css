@@ -1,6 +1,6 @@
 .deck-component {
-  display: fixed;
-  position: absolute;
+  display: absolute;
+  position: fixed;
   right: 0;
   height: 80vh;
   width: 120px;
@@ -10,7 +10,16 @@
   border-bottom-left-radius: 12px;
 }
 
-aside > p {
+aside>p {
   text-align: center;
   color: rgba(130, 49, 20, 1);
+}
+
+.user-collection-list{
+  padding: 0;
+}
+
+.user-collection-list>li {
+  list-style: none;
+  padding: 10px 0;
 }

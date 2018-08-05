@@ -18,10 +18,12 @@ export default class Homepage extends Component {
       rarityValue: '',
       setValue: '',
       returnVal: [],
+      userCollection: [],
       imgError: "/assets/images/404-creature-hstone-light.png"
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.handleImageError = this.handleImageError.bind(this);
   }
 
@@ -44,8 +46,8 @@ export default class Homepage extends Component {
   }
 
   handleImageError(e) {
-   e.target.className = 'noHover'
-   console.log(e.target.className)
+    e.target.className = 'noHover'
+    console.log(e.target.className)
   }
 
   getCards(e) {
@@ -161,12 +163,22 @@ export default class Homepage extends Component {
     }
   }
 
+  handleClick(e) {
+    let selectedCard = e.target;
+    this.setState({ userCollection: [...this.state.userCollection, selectedCard.getAttribute("cardname")] }, () =>
+      console.log(this.state.userCollection)
+    )
+  }
+
   render() {
     return (
       <div className="homepage-page">
 
         <Header />
-        <Deck />
+        <Deck
+          userCollection={this.state.userCollection}
+        />
+
         <div className="container homepage-landing-header">
           <h1>Homepage</h1>
           <p className="homepage-landing-intro">Crush your Addiction</p>
@@ -200,14 +212,25 @@ export default class Homepage extends Component {
               <ul className="result-list">
                 {this.state.returnVal.map((result, index) => {
                   return (
-                    <li key={result.name + index}>
+                    <li onClick={this.handleClick} key={result.name + index}>
                       <h4>{result.name}</h4>
                       {
-                        <img src={result.img} key={result.cardId} alt={result.name} onError={(e) => {
-                          this.handleImageError(e)
-                          e.target.src = this.state.imgError;
-                        }
-                        } />
+                        <img
+                          src={result.img}
+                          key={result.cardId}
+                          alt={result.name}
+                          cardname={result.name}
+                          race={result.race}
+                          cost={result.cost}
+                          health={result.health}
+                          attack={result.attack}
+                          rarity={result.rarity}
+                          set={result.cardSet}
+                          onError={(e) => {
+                            this.handleImageError(e)
+                            e.target.src = this.state.imgError;
+                          }
+                          } />
                       }
                       <p>Set: {result.cardSet}</p>
                       <p>Rarity: {result.rarity ? result.rarity : "Non Collectable"}</p>

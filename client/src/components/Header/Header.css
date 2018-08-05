@@ -6,14 +6,17 @@
 .navbar>li {
   display: inline-block;
   margin-left: 20px;
+  
 }
 
 .navbar>li>a {
-  color: gray;
+  text-decoration: none;
+  color: #3f3f3f;
 }
 
-.hstone-logo>img {
+.hstone-logo img {
   position: absolute;
-  left: 20px;
-  height: 150px;
+  top: 50px;
+  left: 50px;
+  height: 75px;
 }
