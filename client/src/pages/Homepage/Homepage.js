@@ -43,6 +43,8 @@ export default class Homepage extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.getCards(e);
+    document.getElementById("hstone-search").reset();
+
   }
 
   handleImageError(e) {
@@ -185,9 +187,9 @@ export default class Homepage extends Component {
         </div>
 
         <div className="container form-container">
-          <form className="search-form">
+          <form id="hstone-search" className="search-form">
             <label htmlFor="cardNameValue">Card Name</label>
-            <input type="text" name="cardNameValue" placeholder="e.g Violet Wurm" onChange={this.handleChange} autoComplete="off" />
+            <input type="text" name="cardNameValue" placeholder="e.g Emeriss, Woecleaver, Hogger " onChange={this.handleChange} autoComplete="off" />
             <label htmlFor="raceValue">Race</label>
             <input type="text" name="raceValue" placeholder="e.g. Murloc/Demon/Dragon/ect..." onChange={this.handleChange} autoComplete="off" />
             <label htmlFor="costValue">Cost</label>
