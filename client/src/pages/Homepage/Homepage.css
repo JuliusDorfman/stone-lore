@@ -69,3 +69,36 @@ form {
 .result-list p {
   margin: 10px auto;
 }
+/* Aside Deck */
+
+.deck-component {
+  display: absolute;
+  position: fixed;
+  right: 0;
+  height: 80vh;
+  width: 120px;
+  border: 1px solid rgba(112, 57, 18);
+  background: rgba(243, 187, 90, .3);
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+aside>p {
+  text-align: center;
+  color: rgba(130, 49, 20, 1);
+}
+
+.user-collection-list {
+  padding: 0;
+}
+
+.user-collection-list>li {
+  display: inline-block;
+  list-style: none;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.user-collection-list>li>p {
+  display: inline;
+}

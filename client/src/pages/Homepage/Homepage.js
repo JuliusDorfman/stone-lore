@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../../components/Header';
-import Deck from '../../components/Deck';
+// import Deck from '../../components/Deck';
 import axios from 'axios';
 import './Homepage.css';
 
@@ -183,9 +183,21 @@ export default class Homepage extends Component {
       <div className="homepage-page">
 
         <Header />
-        <Deck
-          userCollection={this.state.userCollection}
-        />
+        <div className="deck-component">
+          <aside className="user-collection">
+            <p>Your Collection</p>
+            <hr />
+            <ul className="user-collection-list">
+              {this.state.userCollection.map((card, index) => {
+                return (
+                  <li>
+                    <p>{card}</p>
+                  </li>
+                )
+              })}
+            </ul>
+          </aside>
+        </div>
 
         <div className="container homepage-landing-header">
           <h1>Homepage</h1>
@@ -193,8 +205,8 @@ export default class Homepage extends Component {
         </div>
 
         <div className="container">
-        <p>1. Search (leave "CARD NAME" value blank for multiple results)</p>
-        <p>2. Click cards to add to your collection</p>
+          <p>1. Search (leave "CARD NAME" value blank for multiple results)</p>
+          <p>2. Click cards to add to your collection</p>
         </div>
 
         <div className="container form-container">

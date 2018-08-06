@@ -1,27 +1,18 @@
 import React, { Component } from 'react'
 import './Deck.css';
-import { createDecipher } from 'crypto';
 
 export default class Deck extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
-    this.handleCollectionChange.bind(this);
+    this.state = {
+      deckCollection: []
+    }
   }
 
-  handleCollectionChange(e) {
-    this.props.userCollection.map(card => {
-      console.log("card", card)
-      return (
-        <li>
-          <p>{card}</p>
-        </li>
-      )
-    })
-  }
-
-  componentDidMount(e) {
-    this.handleCollectionChange
+  handleCollectionUpdate(props) {
+    this.setState({ deckCollection: [...this.state.deckCollection, this.props.userCollection] },
+      console.log(this.state.deckCollection)
+    )
   }
 
   render() {
@@ -31,9 +22,7 @@ export default class Deck extends Component {
           <p>Your Collection</p>
           <hr />
           <ul className="user-collection-list">
-            {
-              this.props.userCollection
-            }
+            {this.state.deckCollection}
           </ul>
         </aside>
       </div>
