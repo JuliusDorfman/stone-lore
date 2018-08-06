@@ -51,7 +51,6 @@ export default class Homepage extends Component {
     this.setState({ healthValue: "" })
     this.setState({ attackValue: "" })
     this.setState({ setValue: "" })
-    console.log(this.state.cardNameValue)
   }
 
   handleImageError(e) {
@@ -89,7 +88,6 @@ export default class Homepage extends Component {
         //@Desc This will Render a Single Set
         if (nameOfSet && !cardNameValue) {
           console.log(nameOfSet)
-          console.log("setValue", setValue)
           if (setValue === nameOfSet.toLocaleLowerCase()) {
             this.setState({ returnVal: singleSet },
               console.log(nameOfSet, singleSet)
@@ -107,10 +105,11 @@ export default class Homepage extends Component {
             if (raceValue === singleCard.race.toLowerCase()) {
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
-              }))
+              })
+              )
             }
+            console.log("returnVal", this.state.returnVal)
           })
-          console.log("returnVal", this.state.returnVal)
         }
 
         // @Desc This will Render all Card with value of COSTVALUE
@@ -120,10 +119,11 @@ export default class Homepage extends Component {
             if (parseInt(costValue, 10) === parseInt(singleCard.cost, 10)) {
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
-              }))
+              }
+              ))
             }
+            console.log("returnVal", this.state.returnVal)
           })
-          console.log("returnVal", this.state.returnVal)
         }
 
         // @Desc This will Render all Card with value of AttackValue
@@ -133,10 +133,11 @@ export default class Homepage extends Component {
             if (parseInt(attackValue, 10) === parseInt(singleCard.attack, 10)) {
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
-              }))
+              }
+              ))
             }
+            console.log("returnVal", this.state.returnVal)
           })
-          console.log("returnVal", this.state.returnVal)
         }
 
         // @Desc This will Render all Card with value of HealthValue
@@ -146,10 +147,11 @@ export default class Homepage extends Component {
             if (parseInt(healthValue, 10) === parseInt(singleCard.health, 10)) {
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
-              }))
+              }
+              ))
             }
+            console.log("returnVal", this.state.returnVal)
           })
-          console.log("returnVal", this.state.returnVal)
         }
 
         // @Desc This will Render all Card with value of rarityValue
@@ -162,10 +164,11 @@ export default class Homepage extends Component {
             if (rarityValue === singleCard.rarity.toLowerCase()) {
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
-              }))
+              }
+              ))
             }
+            console.log("returnVal", this.state.returnVal)
           })
-          console.log("returnVal", this.state.returnVal)
         }
       }
     }
@@ -190,7 +193,9 @@ export default class Homepage extends Component {
             <ul className="user-collection-list">
               {this.state.userCollection.map((card, index) => {
                 return (
-                  <li>
+                  <li
+                    key={card + index}
+                  >
                     <p>{card}</p>
                   </li>
                 )
@@ -228,7 +233,17 @@ export default class Homepage extends Component {
             <label htmlFor="rarityValue">Rarity</label>
             <input type="text" name="rarityValue" placeholder="e.g. Common/Rare/Epic/Legendary" onChange={this.handleChange} autoComplete="off" />
             <label htmlFor="setValue">Set</label>
-            <input type="text" name="setValue" placeholder="e.g. The Witchwood" onChange={this.handleChange} autoComplete="off" />
+            {/* <input type="text" name="setValue" placeholder="e.g. The Witchwood" onChange={this.handleChange} autoComplete="off" /> */}
+            <select name="setValue" onChange={this.handleChange}>
+              <option placeholder="Optional">Optional</option>
+              <option value="Basic">Basic</option>
+              <option value="Classic">Classic</option>
+              <option value="Journey to Un'Goro">Journey to Un'Goro</option>
+              <option value="Knights of the Frozen Throne">Knights of the Frozen Throne</option>
+              <option value="Kobolds & Catacombs">Kobolds & Catacombs</option>
+              <option value="The Witchwood">The Witchwood</option>
+              <option value="The Boomsday Project">The Boomsday Project</option>
+            </select>
             <hr />
             <button type="submit" name="search" value="Submit" onClick={this.handleSubmit}>Submit</button>
           </form>
@@ -241,12 +256,12 @@ export default class Homepage extends Component {
               <ul className="result-list">
                 {this.state.returnVal.map((result, index) => {
                   return (
-                    <li onClick={this.handleClick} key={result.name + index}>
+                    <li key={result.name + index}>
                       <h4>{result.name}</h4>
                       {
                         <img
                           src={result.img}
-                          key={result.cardId}
+                          key={result.cardId + index}
                           alt={result.name}
                           cardname={result.name}
                           race={result.race}
@@ -255,6 +270,7 @@ export default class Homepage extends Component {
                           attack={result.attack}
                           rarity={result.rarity}
                           set={result.cardSet}
+                          onClick={this.handleClick}
                           onError={(e) => {
                             this.handleImageError(e)
                             e.target.src = this.state.imgError;

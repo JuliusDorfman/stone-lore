@@ -25,9 +25,16 @@ form {
   color: rgba(130, 49, 20, 1);
 }
 
-.search-form>input {
+.search-form>input,
+select {
+  border: 2px inset #EBE9ED;
   background: rgba(253, 249, 243, 1);
   color: rgba(130, 39, 15, 1);
+}
+
+.search-form>select {
+  color: rgba(164, 69, 30, .6);
+  padding: 0;
 }
 
 .search-form>input::placeholder {
