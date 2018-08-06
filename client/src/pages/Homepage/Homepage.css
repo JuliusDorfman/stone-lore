@@ -34,7 +34,6 @@ select {
 
 .search-form>select {
   color: rgba(164, 69, 30, .6);
-  padding: 0;
 }
 
 .search-form>input::placeholder {

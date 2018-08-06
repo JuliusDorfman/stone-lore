@@ -6,7 +6,7 @@ export default class Header extends Component {
     return (
       <div className="header-component">
         <header>
-          <div className="hstone-logo"><a href='/'><img src="/assets/images/hstoneconceptlogo.png" alt="site-logo"/></a></div>
+          <div className="hstone-logo"><a href='/'><img src="/assets/images/hstone-logo.png" alt="site-logo"/></a></div>
           <div className="container">
             <ul className="navbar">
               <li><a href="/">Home</a></li>
