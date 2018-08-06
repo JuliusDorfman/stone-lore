@@ -87,12 +87,12 @@ export default class Homepage extends Component {
 
         //@Desc This will Render a Single Set
         if (nameOfSet && !cardNameValue) {
-          console.log(nameOfSet)
           if (setValue === nameOfSet.toLocaleLowerCase()) {
             this.setState({ returnVal: singleSet },
               console.log(nameOfSet, singleSet)
             )
           }
+          console.log(nameOfSet)
         }
 
         //@Desc This will Render all Races
@@ -233,9 +233,8 @@ export default class Homepage extends Component {
             <label htmlFor="rarityValue">Rarity</label>
             <input type="text" name="rarityValue" placeholder="e.g. Common/Rare/Epic/Legendary" onChange={this.handleChange} autoComplete="off" />
             <label htmlFor="setValue">Set</label>
-            {/* <input type="text" name="setValue" placeholder="e.g. The Witchwood" onChange={this.handleChange} autoComplete="off" /> */}
             <select name="setValue" onChange={this.handleChange}>
-              <option placeholder="Optional">Optional</option>
+              <option>Optional</option>
               <option value="Basic">Basic</option>
               <option value="Classic">Classic</option>
               <option value="Journey to Un'Goro">Journey to Un'Goro</option>
@@ -260,7 +259,7 @@ export default class Homepage extends Component {
                       <h4>{result.name}</h4>
                       {
                         <img
-                          src={result.img}
+                          src={result.img ? result.img : this.state.imgError}
                           key={result.cardId + index}
                           alt={result.name}
                           cardname={result.name}
