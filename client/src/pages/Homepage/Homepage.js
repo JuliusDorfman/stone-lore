@@ -44,12 +44,18 @@ export default class Homepage extends Component {
     e.preventDefault();
     this.getCards(e);
     document.getElementById("hstone-search").reset();
-
+    this.setState({ cardNameValue: "" })
+    this.setState({ raceValue: "" })
+    this.setState({ costValue: "" })
+    this.setState({ rarityValue: "" })
+    this.setState({ healthValue: "" })
+    this.setState({ attackValue: "" })
+    this.setState({ setValue: "" })
+    console.log(this.state.cardNameValue)
   }
 
   handleImageError(e) {
     e.target.className = 'noHover'
-    console.log(e.target.className)
   }
 
   getCards(e) {
@@ -184,6 +190,11 @@ export default class Homepage extends Component {
         <div className="container homepage-landing-header">
           <h1>Homepage</h1>
           <p className="homepage-landing-intro">Crush your Addiction</p>
+        </div>
+
+        <div className="container">
+        <p>1. Search (leave "CARD NAME" value blank for multiple results)</p>
+        <p>2. Click cards to add to your collection</p>
         </div>
 
         <div className="container form-container">
