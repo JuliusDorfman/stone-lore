@@ -21,16 +21,16 @@ form {
   width: 400px;
 }
 
-.search-form > label {
+.search-form>label {
   color: rgba(130, 49, 20, 1);
 }
 
-.search-form > input {
+.search-form>input {
   background: rgba(253, 249, 243, 1);
   color: rgba(130, 39, 15, 1);
 }
 
-.search-form > input::placeholder {
+.search-form>input::placeholder {
   color: rgba(164, 69, 30, .6);
 }
 
@@ -69,6 +69,7 @@ form {
 .result-list p {
   margin: 10px auto;
 }
+
 /* Aside Deck */
 
 .deck-component {
@@ -88,15 +89,34 @@ aside>p {
   color: rgba(130, 49, 20, 1);
 }
 
+.user-collection {
+  height: 85%;
+}
+
+.user-collection>p {
+  margin: 7px 0 0 0;
+}
+
 .user-collection-list {
+  margin: 0;
   padding: 0;
+  height: 100%;
+  font-size: 14px;
+}
+
+.card-count {
+  text-align: center;
+}
+
+.card-count>p {
+  color: rgba(130, 49, 20, 1);
+  margin: auto;
 }
 
 .user-collection-list>li {
   display: inline-block;
   list-style: none;
   width: 100%;
-  padding: 10px 0;
 }
 
 .user-collection-list>li>p {

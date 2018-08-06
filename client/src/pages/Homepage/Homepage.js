@@ -196,6 +196,10 @@ export default class Homepage extends Component {
                 )
               })}
             </ul>
+            <div className="card-count">
+              <hr />
+              <p>Cards: {this.state.userCollection.length}/30</p>
+            </div>
           </aside>
         </div>
 
