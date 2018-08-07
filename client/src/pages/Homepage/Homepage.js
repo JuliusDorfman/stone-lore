@@ -9,7 +9,7 @@ export default class Homepage extends Component {
     super(props);
     this.state = {
       completeCardListBySet: [],
-      standardMetaCardList: "",
+      standardMetaCardList: '',
       cardNameValue: '',
       raceValue: '',
       costValue: '',
@@ -42,22 +42,22 @@ export default class Homepage extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.getCards(e);
-    document.getElementById("hstone-search").reset();
+    this.getCards();
     this.setState({ cardNameValue: "" })
     this.setState({ raceValue: "" })
     this.setState({ costValue: "" })
-    this.setState({ rarityValue: "" })
     this.setState({ healthValue: "" })
     this.setState({ attackValue: "" })
+    this.setState({ rarityValue: "" })
     this.setState({ setValue: "" })
+    document.getElementById("hstone-search").reset();
   }
 
   handleImageError(e) {
     e.target.className = 'noHover'
   }
 
-  getCards(e) {
+  getCards() {
     let completeCardListBySet = this.state.completeCardListBySet;
     let cardNameValue = this.state.cardNameValue;
     let raceValue = this.state.raceValue;
@@ -67,6 +67,15 @@ export default class Homepage extends Component {
     let rarityValue = this.state.rarityValue;
     let setValue = this.state.setValue;
     let returnVal = this.state.returnVal;
+
+    console.log("cardNameValue", cardNameValue)
+    console.log("raceValue", raceValue)
+    console.log("costValue", costValue)
+    console.log("healthValue", healthValue)
+    console.log("attackValue", attackValue)
+    console.log("rarityValue", rarityValue)
+    console.log("setValue", setValue)
+    console.log("returnVal", returnVal)
 
     if (returnVal) {
       this.setState({ returnVal: [] })
@@ -80,7 +89,10 @@ export default class Homepage extends Component {
         if (cardNameValue) {
           singleSet.forEach((singleCard, index) => {
             if (cardNameValue === singleCard.name.toLowerCase()) {
-              this.setState({ returnVal: [singleSet[index]] })
+              this.setState(prevState => ({
+                returnVal: [...prevState.returnVal, singleCard]
+              })
+              )
             }
           })
         }
@@ -100,7 +112,6 @@ export default class Homepage extends Component {
             if (singleCard.race === undefined) {
               return null
             }
-            console.log("race", singleCard.race)
             if (raceValue === singleCard.race.toLowerCase()) {
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
@@ -108,6 +119,7 @@ export default class Homepage extends Component {
               )
             }
           })
+          console.log("race", this.state.returnVal)
         }
 
         // @Desc This will Render all Card with value of COSTVALUE
@@ -121,6 +133,7 @@ export default class Homepage extends Component {
               ))
             }
           })
+          console.log("cost", this.state.returnVal)
         }
 
         // @Desc This will Render all Card with value of AttackValue
@@ -134,6 +147,7 @@ export default class Homepage extends Component {
               ))
             }
           })
+          console.log("attackValue", this.state.returnVal)
         }
 
         // @Desc This will Render all Card with value of HealthValue
@@ -165,7 +179,7 @@ export default class Homepage extends Component {
         }
 
         // @Desc This will Render all Cards with value of raceValue && cardValue
-        if (raceValue && costValue && !cardNameValue) {
+        if (raceValue && costValue && !cardNameValue && !attackValue && !healthValue && !rarityValue) {
           singleSet.forEach((singleCard, index) => {
             if (singleCard.race === undefined) {
               return null
@@ -184,7 +198,7 @@ export default class Homepage extends Component {
         }
 
         // @Desc This will Render all Cards with value of raceValue && healthValue
-        if (raceValue && healthValue && !cardNameValue && !costValue) {
+        if (raceValue && healthValue && !cardNameValue && !costValue && !attackValue) {
           singleSet.forEach((singleCard, index) => {
             if (singleCard.race === undefined) {
               return null
@@ -203,7 +217,7 @@ export default class Homepage extends Component {
         }
 
         // @Desc This will Render all Cards with value of raceValue && attackValue
-        if (raceValue && attackValue && !cardNameValue && !costValue) {
+        if (raceValue && attackValue && !cardNameValue && !costValue && !healthValue) {
           singleSet.forEach((singleCard, index) => {
             if (singleCard.race === undefined) {
               return null
@@ -222,7 +236,10 @@ export default class Homepage extends Component {
         }
 
         // @Desc This will Render all Cards with value of raceValue && rarityValue
-        if (raceValue && rarityValue && !cardNameValue && !costValue) {
+        if (raceValue && rarityValue && !cardNameValue && !costValue && !attackValue && !healthValue) {
+          console.log(raceValue)
+          console.log(rarityValue)
+          console.log(cardNameValue)
           singleSet.forEach((singleCard, index) => {
             if (singleCard.race === undefined) {
               return null
@@ -241,7 +258,7 @@ export default class Homepage extends Component {
         }
 
         // @Desc This will Render all Cards with value of costValue && healthValue
-        if (costValue && healthValue && !raceValue && !attackValue && !rarityValue) {
+        if (costValue && healthValue && !raceValue && !attackValue && !rarityValue && !cardNameValue) {
           singleSet.forEach((singleCard, index) => {
             if (singleCard.cost === undefined) {
               return null
@@ -260,7 +277,7 @@ export default class Homepage extends Component {
         }
 
         // @Desc This will Render all Cards with value of costValue && attackValue
-        if (costValue && attackValue && !healthValue && !raceValue && !rarityValue) {
+        if (costValue && attackValue && !healthValue && !raceValue && !rarityValue && !cardNameValue) {
           singleSet.forEach((singleCard, index) => {
             if (singleCard.cost === undefined) {
               return null
@@ -279,7 +296,7 @@ export default class Homepage extends Component {
         }
 
         // @Desc This will Render all Cards with value of costValue && raceValue
-        if (costValue && raceValue && !healthValue && !attackValue && !rarityValue) {
+        if (costValue && raceValue && !healthValue && !attackValue && !rarityValue && !cardNameValue) {
           singleSet.forEach((singleCard, index) => {
             if (singleCard.cost === undefined) {
               return null
@@ -298,7 +315,7 @@ export default class Homepage extends Component {
         }
 
         // @Desc This will Render all Cards with value of healthValue && attackValue
-        if (healthValue && attackValue && !costValue && !raceValue && !rarityValue) {
+        if (healthValue && attackValue && !costValue && !raceValue && !rarityValue && !cardNameValue) {
           singleSet.forEach((singleCard, index) => {
             if (singleCard.health === undefined) {
               return null
@@ -318,7 +335,7 @@ export default class Homepage extends Component {
 
 
         // @Desc This will Render all Cards with value of healthValue && rarityValue
-        if (costValue && rarityValue && !healthValue && !raceValue && !attackValue) {
+        if (costValue && rarityValue && !healthValue && !raceValue && !attackValue && !cardNameValue) {
           singleSet.forEach((singleCard, index) => {
             if (singleCard.cost === undefined) {
               return null
@@ -334,6 +351,104 @@ export default class Homepage extends Component {
             }
           })
           console.log("cost & rarity", this.state.returnVal)
+        }
+
+        // @Desc This will Render all Cards with value of healthValue && attackValue
+        if (healthValue && attackValue && !rarityValue && !raceValue && !costValue && !cardNameValue) {
+          singleSet.forEach((singleCard, index) => {
+            if (singleCard.health === undefined) {
+              return null
+            }
+            if (singleCard.attack === undefined) {
+              return null
+            }
+            if (parseInt(healthValue, 10) === parseInt(singleCard.health, 10) && parseInt(attackValue, 10) === parseInt(singleCard.attackattackValue, 10)) {
+              console.log(singleCard.health + "ok" + singleCard.attack)
+              this.setState(prevState => ({
+                returnVal: [...prevState.returnVal, singleCard]
+              }))
+            }
+          })
+          console.log("health & attack", this.state.returnVal)
+        }
+
+        // @Desc This will Render all Cards with value of costValue && healthValue && attackValue
+        if (costValue && healthValue && attackValue && !rarityValue && !raceValue && !cardNameValue) {
+          singleSet.forEach((singleCard, index) => {
+            if (singleCard.cost === undefined) {
+              return null
+            }
+            if (singleCard.health === undefined) {
+              return null
+            }
+            if (singleCard.attack === undefined) {
+              return null
+            }
+            if (parseInt(costValue, 10) === parseInt(singleCard.cost, 10) && parseInt(healthValue, 10) === parseInt(singleCard.health, 10) && parseInt(attackValue, 10) === parseInt(singleCard.attack, 10)) {
+              this.setState(prevState => ({
+                returnVal: [...prevState.returnVal, singleCard]
+              })
+              )
+            }
+          })
+        }
+
+        // @Desc This will Render all Cards with value of raceValue && costValue && healthValue && attackValue
+        if (costValue && healthValue && attackValue && raceValue && !rarityValue && !cardNameValue) {
+          singleSet.forEach((singleCard, index) => {
+            if (singleCard.cost === undefined) {
+              return null
+            }
+            if (singleCard.health === undefined) {
+              return null
+            }
+            if (singleCard.attack === undefined) {
+              return null
+            }
+            if (singleCard.race === undefined) {
+              return null
+            }
+            if (parseInt(costValue, 10) === parseInt(singleCard.cost, 10) && parseInt(healthValue, 10) === parseInt(singleCard.health, 10) && parseInt(attackValue, 10) === parseInt(singleCard.attack, 10) && raceValue === singleCard.race.toLowerCase()) {
+              console.log(singleCard.health + " " + singleCard.attack + " " + singleCard.cost + " " + singleCard.race)
+              this.setState(prevState => ({
+                returnVal: [...prevState.returnVal, singleCard]
+              }))
+            }
+          })
+          console.log("health & cost & attack & race", this.state.returnVal)
+        }
+
+        // @Desc This will Render all Cards with value of raceValue && costValue && healthValue && attackValue && rarityValue
+        if (costValue && healthValue && attackValue && raceValue && rarityValue && !cardNameValue) {
+          singleSet.forEach((singleCard, index) => {
+            if (singleCard.cost === undefined) {
+              return null
+            }
+            if (singleCard.health === undefined) {
+              return null
+            }
+            if (singleCard.attack === undefined) {
+              return null
+            }
+            if (singleCard.race === undefined) {
+              return null
+            }
+            if (singleCard.rarity === undefined) {
+              return null
+            }
+            if (parseInt(costValue, 10) === parseInt(singleCard.cost, 10)
+              && parseInt(healthValue, 10) === parseInt(singleCard.health, 10)
+              && parseInt(attackValue, 10) === parseInt(singleCard.attack, 10)
+              && raceValue === singleCard.race.toLowerCase()
+              && rarityValue === singleCard.rarity.toLowerCase()
+            ) {
+              console.log(singleCard.health + " " + singleCard.attack + " " + singleCard.cost + " " + singleCard.race + " " + singleCard.rarity)
+              this.setState(prevState => ({
+                returnVal: [...prevState.returnVal, singleCard]
+              }))
+            }
+          })
+          console.log("health & cost & attack & race", this.state.returnVal)
         }
       }
     }
