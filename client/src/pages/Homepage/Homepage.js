@@ -8,6 +8,7 @@ export default class Homepage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loadingData: false,
       completeCardListBySet: [],
       standardMetaCardList: '',
       cardNameValue: '',
@@ -19,11 +20,14 @@ export default class Homepage extends Component {
       setValue: '',
       returnVal: [],
       userCollection: [],
+      userDeck: [],
       imgError: "/assets/images/404-creature-hstone-light.png"
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleCollectionReset = this.handleCollectionReset.bind(this);
+    this.handleCollectionSubmit = this.handleCollectionSubmit.bind(this);
     this.handleImageError = this.handleImageError.bind(this);
   }
 
@@ -39,10 +43,20 @@ export default class Homepage extends Component {
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value.toLowerCase() })
     console.log("e.target.name", e.target.name)
-
   }
 
-  handleSubmit(e) { 
+  handleCollectionReset(e) {
+    this.setState({ userCollection: [] })
+  }
+
+  handleCollectionSubmit(e) {
+    console.log("this.state.userCollection", this.state.userCollection)
+    this.setState({ userDeck: this.state.userCollection }, () =>
+      console.log(this.state.userDeck)
+    )
+  }
+
+  handleSubmit(e) {
     e.preventDefault();
     this.getCards();
     this.setState({ cardNameValue: "" })
@@ -56,7 +70,6 @@ export default class Homepage extends Component {
     console.log("submit CostValue", this.state.costValue)
 
     document.getElementById("hstone-search").reset();
-    
   }
 
   handleImageError(e) {
@@ -462,7 +475,10 @@ export default class Homepage extends Component {
 
   handleClick(e) {
     let selectedCard = e.target;
-    this.setState({ userCollection: [...this.state.userCollection, selectedCard.getAttribute("cardname")] }, () =>
+    if (this.state.userCollection.length >= 30) {
+      return null
+    }
+    this.setState({ userCollection: [...this.state.userCollection, selectedCard] }, () =>
       console.log(this.state.userCollection)
     )
   }
@@ -480,9 +496,9 @@ export default class Homepage extends Component {
               {this.state.userCollection.map((card, index) => {
                 return (
                   <li
-                    key={card + index}
+                    key={card.getAttribute('cardname') + index}
                   >
-                    <p>{card}</p>
+                    <p>{card.getAttribute('cardname')}</p>
                   </li>
                 )
               })}
@@ -490,6 +506,8 @@ export default class Homepage extends Component {
             <div className="card-count">
               <hr />
               <p>Cards: {this.state.userCollection.length}/30</p>
+              <button onClick={this.handleCollectionSubmit}>Submit Selection</button>
+              <button onClick={this.handleCollectionReset}>Reset Selection</button>
             </div>
           </aside>
         </div>
@@ -536,6 +554,44 @@ export default class Homepage extends Component {
         </div>
 
         <div className="container img-container">
+          {
+            this.state.userDeck
+              ?
+              <ul className="result-list">
+                {this.state.userDeck.map((result, index) => {
+                  console.log("userdeck", result)
+                  return (
+                    <li key={result.name + index}>
+                      <h4>{result.name}</h4>
+                      {
+                        <img
+                          src={result.src ? result.src : this.state.imgError}
+                          key={result.cardId + index}
+                          alt={result.name}
+                          cardname={result.name}
+                          race={result.race}
+                          cost={result.cost}
+                          health={result.health}
+                          attack={result.attack}
+                          rarity={result.rarity}
+                          set={result.cardSet}
+                          onClick={this.handleClick}
+                          onError={(e) => {
+                            this.handleImageError(e)
+                            e.target.src = this.state.imgError;
+                          }
+                          } />
+                      }
+                      <p>Set: {result.cardSet}</p>
+                      <p>Rarity: {result.rarity ? result.rarity : "Non Collectable"}</p>
+                    </li>
+                  )
+                })
+                }
+              </ul>
+              :
+              <span />
+          }
           {
             this.state.returnVal
               ?
