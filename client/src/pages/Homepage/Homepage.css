@@ -128,3 +128,30 @@ aside>p {
 .user-collection-list>li>p {
   display: inline;
 }
+
+/* Spinner */
+
+.loading-component>p{
+  font-size: 40px;
+  text-align: center;
+}
+
+.loading-spinner {
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  animation: spinner 2s infinite linear;
+  color: black;
+}
+
+@keyframes spinner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
