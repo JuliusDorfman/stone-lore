@@ -38,9 +38,11 @@ export default class Homepage extends Component {
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value.toLowerCase() })
+    console.log("e.target.name", e.target.name)
+
   }
 
-  handleSubmit(e) {
+  handleSubmit(e) { 
     e.preventDefault();
     this.getCards();
     this.setState({ cardNameValue: "" })
@@ -50,7 +52,11 @@ export default class Homepage extends Component {
     this.setState({ attackValue: "" })
     this.setState({ rarityValue: "" })
     this.setState({ setValue: "" })
+
+    console.log("submit CostValue", this.state.costValue)
+
     document.getElementById("hstone-search").reset();
+    
   }
 
   handleImageError(e) {
@@ -163,7 +169,7 @@ export default class Homepage extends Component {
         }
 
         // @Desc This will Render all Card with value of rarityValue
-        if (rarityValue && !cardNameValue & !raceValue && !costValue) {
+        if (rarityValue && !cardNameValue && !raceValue && !costValue) {
           singleSet.forEach((singleCard, index) => {
             if (singleCard.rarity === undefined) {
               return null
@@ -495,25 +501,26 @@ export default class Homepage extends Component {
 
         <div className="container">
           <p>1. Search (leave "CARD NAME" value blank for multiple results)</p>
-          <p>2. Click cards to add to your collection</p>
+          <p>2. Choose 30 cards</p>
+          <p>3. </p>
         </div>
 
         <div className="container form-container">
           <form id="hstone-search" className="search-form">
             <label htmlFor="cardNameValue">Card Name</label>
-            <input type="text" name="cardNameValue" placeholder="e.g Emeriss, Woecleaver, Hogger " onChange={this.handleChange} autoComplete="off" />
+            <input type="text" name="cardNameValue" placeholder="e.g Emeriss, Woecleaver, Hogger " value={this.state.cardNameValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
             <label htmlFor="raceValue">Race</label>
-            <input type="text" name="raceValue" placeholder="e.g. Murloc/Demon/Dragon/ect..." onChange={this.handleChange} autoComplete="off" />
+            <input type="text" name="raceValue" placeholder="e.g. Murloc/Demon/Dragon/ect..." value={this.state.raceValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
             <label htmlFor="costValue">Cost</label>
-            <input type="text" name="costValue" placeholder="Integer" onChange={this.handleChange} autoComplete="off" />
+            <input type="number" name="costValue" placeholder="Integer" value={this.state.costValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
             <label htmlFor="healthValue">Health</label>
-            <input type="text" name="healthValue" placeholder="Integer" onChange={this.handleChange} autoComplete="off" />
+            <input type="number" name="healthValue" placeholder="Integer" value={this.state.healthValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
             <label htmlFor="attackValue">Attack</label>
-            <input type="text" name="attackValue" placeholder="Integer" onChange={this.handleChange} autoComplete="off" />
+            <input type="number" name="attackValue" placeholder="Integer" value={this.state.attackValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
             <label htmlFor="rarityValue">Rarity</label>
-            <input type="text" name="rarityValue" placeholder="e.g. Common/Rare/Epic/Legendary" onChange={this.handleChange} autoComplete="off" />
+            <input type="text" name="rarityValue" placeholder="e.g. Common/Rare/Epic/Legendary" value={this.state.rarityValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
             <label htmlFor="setValue">Set</label>
-            <select name="setValue" placeholder="Optional" onChange={this.handleChange}>
+            <select name="setValue" placeholder="Optional" value={this.state.setValue} className="form-values" onChange={this.handleChange}>
               <option placeholder="Optional">Optional</option>
               <option value="Basic">Basic</option>
               <option value="Classic">Classic</option>
