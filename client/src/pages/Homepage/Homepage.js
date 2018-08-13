@@ -40,6 +40,7 @@ export default class Homepage extends Component {
         this.setState({ loadingData: false })
       })
     })
+    console.log("state.userDeck", this.state.userDeck)
   }
 
   handleChange(e) {
@@ -522,17 +523,18 @@ export default class Homepage extends Component {
           <p className="homepage-landing-intro">Crush your Addiction</p>
         </div>
 
-        <div className="container">
+        <details className="container">
+        <summary>Instructions</summary>
           <p>1. Search (No Fields Are Required)</p>
           <p>2. Choose 30 cards</p>
           <p>3. Click Submit at Bottom of Deck Tracker</p>
-        </div>
+        </details>
 
         {
           this.state.loadingData
             ?
             <div className="loading-component">
-              <p>Loading (5 seconds)</p>
+              <p>Loading (Up to 30 seconds)</p>
               <img className="loading-spinner" src="/assets/images/hstone-logo.png" alt="site-logo" style={{ height: "150px", width: "150px" }} />
             </div>
             :
@@ -568,43 +570,52 @@ export default class Homepage extends Component {
 
         }
         <div className="container img-container">
+          {this.state.userDeck.length === 0 ? <span /> : <h4 className="collection-title">Your Collection</h4>}
           {
-            this.state.userDeck
+            this.state.userDeck !== []
               ?
               <ul className="result-list">
-                {this.state.userDeck.map((result, index) => {
-                  console.log("userdeck", result)
-                  return (
-                    <li key={result.name + index}>
-                      <h4>{result.name}</h4>
-                      {
-                        <img
-                          src={result.src ? result.src : this.state.imgError}
-                          key={result.cardId + index}
-                          alt={result.name}
-                          cardname={result.name}
-                          race={result.race}
-                          cost={result.cost}
-                          health={result.health}
-                          attack={result.attack}
-                          rarity={result.rarity}
-                          set={result.cardSet}
-                          onClick={this.handleClick}
-                          onError={(e) => {
-                            this.handleImageError(e)
-                            e.target.src = this.state.imgError;
-                          }
-                          } />
-                      }
-                      <p>Set: {result.cardSet}</p>
-                      <p>Rarity: {result.rarity ? result.rarity : "Non Collectable"}</p>
-                    </li>
-                  )
-                })
+                {
+                  this.state.userDeck.map((result, index) => {
+                    console.log("userdeck", result)
+                    return (
+                      <li key={result.name + index}>
+                        <h4>{result.name}</h4>
+                        {
+                          <img
+                            src={result.src ? result.src : this.state.imgError}
+                            key={result.cardId + index}
+                            alt={result.name}
+                            cardname={result.name}
+                            race={result.race}
+                            cost={result.cost}
+                            health={result.health}
+                            attack={result.attack}
+                            rarity={result.rarity}
+                            set={result.cardSet}
+                            onClick={this.handleClick}
+                            onError={(e) => {
+                              this.handleImageError(e)
+                              e.target.src = this.state.imgError;
+                            }
+                            } />
+                        }
+                        <p>Set: {result.cardSet}</p>
+                        <p>Rarity: {result.rarity ? result.rarity : "Non Collectable"}</p>
+                      </li>
+                    )
+                  })
                 }
               </ul>
               :
               <span />
+          }
+          {
+            this.state.returnVal.length === 0 ? <span /> : (
+              <div>
+                <h4 className="search-results-title">Search Results: </h4>
+              </div>
+            )
           }
           {
             this.state.returnVal

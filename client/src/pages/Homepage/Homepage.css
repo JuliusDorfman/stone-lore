@@ -1,6 +1,6 @@
 .form-container {
   display: inline-block;
-  margin-top: 100px;
+  margin: 100px;
   padding: 30px;
   border-radius: 12px;
   background: rgba(243, 187, 90, .3);
@@ -101,6 +101,20 @@ aside>p {
 
 .user-collection>p {
   margin: 7px 0 0 0;
+}
+
+.collection-title {
+  text-align: center;
+  color: rgba(130, 49, 20, 1);
+  font-size: 32px;
+  margin: 0;
+}
+
+.search-results-title {
+  text-align: center;
+  color: rgba(130, 49, 20, 1);
+  font-size: 32px;
+  margin: 0;
 }
 
 .user-collection-list {

@@ -9,7 +9,7 @@ export default class AboutMe extends Component {
         <Header />
         <div className="container aboutme-landing-header">
           <h1>About Me</h1>
-          <p className="aboutme-landing-intro">To Be Announced!</p>
+          <p className="aboutme-landing-intro">Who Cares, Just Make The App Work!</p>
         </div>
 
       </div>
