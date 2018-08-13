@@ -29,6 +29,7 @@ export default class Homepage extends Component {
     this.handleCollectionReset = this.handleCollectionReset.bind(this);
     this.handleCollectionSubmit = this.handleCollectionSubmit.bind(this);
     this.handleImageError = this.handleImageError.bind(this);
+    this.removeItemFromUserDeck = this.removeItemFromUserDeck.bind(this);
   }
 
   componentDidMount() {
@@ -40,12 +41,10 @@ export default class Homepage extends Component {
         this.setState({ loadingData: false })
       })
     })
-    console.log("state.userDeck", this.state.userDeck)
   }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value.toLowerCase() })
-    console.log("e.target.name", e.target.name)
   }
 
   handleCollectionReset(e) {
@@ -60,6 +59,21 @@ export default class Homepage extends Component {
       console.log(this.state.userDeck)
       this.setState({ returnVal: [] })
     })
+  }
+
+  removeItemFromUserDeck(e) {
+    let temporaryUserCollection = [...this.state.userDeck];
+
+    this.state.userCollection.map((collectionItem, index) => {
+      console.log("collectionItem", collectionItem.getAttribute('cardname'))
+      console.log("e.target...", e.target.innerHTML)
+      if(collectionItem.getAttribute('cardname') === e.target.innerHTML) {
+         console.log("match");
+      } else {
+        console.log("nomatch")
+      }
+    })
+    // this.setState({userCollection: [temporaryUserCollection]})
   }
 
   handleSubmit(e) {
@@ -499,15 +513,19 @@ export default class Homepage extends Component {
             <p>Your Collection</p>
             <hr />
             <ul className="user-collection-list">
-              {this.state.userCollection.map((card, index) => {
-                return (
-                  <li
-                    key={card.getAttribute('cardname') + index}
-                  >
-                    <p>{card.getAttribute('cardname')}</p>
-                  </li>
-                )
-              })}
+              {this.state.userCollection.map(
+                (card, index) => {
+                  return (
+                    <li
+                      className="user-collection-list-item"
+                      key={card.getAttribute('cardname') + index}
+                      onClick={this.removeItemFromUserDeck}
+                    >
+                      <p>{card.getAttribute('cardname')}</p>
+                    </li>
+                  )
+                }
+              )}
             </ul>
             <div className="card-count">
               <hr />
@@ -524,7 +542,7 @@ export default class Homepage extends Component {
         </div>
 
         <details className="container">
-        <summary>Instructions</summary>
+          <summary>Instructions</summary>
           <p>1. Search (No Fields Are Required)</p>
           <p>2. Choose 30 cards</p>
           <p>3. Click Submit at Bottom of Deck Tracker</p>

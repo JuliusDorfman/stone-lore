@@ -76,6 +76,10 @@ select {
   margin: 10px auto;
 }
 
+.user-collection-list-item {
+  color: mediumblue;
+}
+
 /* Aside Deck */
 
 .deck-component {
