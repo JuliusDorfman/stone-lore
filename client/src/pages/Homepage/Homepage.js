@@ -56,7 +56,7 @@ export default class Homepage extends Component {
   handleCollectionSubmit(e) {
     console.log("this.state.userCollection", this.state.userCollection)
     this.setState({ userDeck: this.state.userCollection }, () => {
-      console.log(this.state.userDeck)
+      console.log("userdeck", this.state.userDeck)
       this.setState({ returnVal: [] })
     })
   }
@@ -67,8 +67,8 @@ export default class Homepage extends Component {
     this.state.userCollection.map((collectionItem, index) => {
       console.log("collectionItem", collectionItem.getAttribute('cardname'))
       console.log("e.target...", e.target.innerHTML)
-      if(collectionItem.getAttribute('cardname') === e.target.innerHTML) {
-         console.log("match");
+      if (collectionItem.getAttribute('cardname') === e.target.innerHTML) {
+        console.log("match");
       } else {
         console.log("nomatch")
       }
@@ -495,11 +495,12 @@ export default class Homepage extends Component {
 
   handleClick(e) {
     let selectedCard = e.target;
+    console.log("selectedCard", selectedCard)
     if (this.state.userCollection.length >= 30) {
       return null
     }
     this.setState({ userCollection: [...this.state.userCollection, selectedCard] }, () =>
-      console.log(this.state.userCollection)
+      console.log("userCollection", this.state.userCollection)
     )
   }
 
@@ -588,14 +589,17 @@ export default class Homepage extends Component {
 
         }
         <div className="container img-container">
-          {this.state.userDeck.length === 0 ? <span /> : <h4 className="collection-title">Your Collection</h4>}
+          {
+            this.state.userDeck.length === 0 ? <span /> :
+              <h4 className="collection-title">Your Collection</h4>
+          }
           {
             this.state.userDeck !== []
               ?
               <ul className="result-list">
                 {
                   this.state.userDeck.map((result, index) => {
-                    console.log("userdeck", result)
+                    console.log("result: ", result)
                     return (
                       <li key={result.name + index}>
                         <h4>{result.name}</h4>
@@ -603,14 +607,14 @@ export default class Homepage extends Component {
                           <img
                             src={result.src ? result.src : this.state.imgError}
                             key={result.cardId + index}
-                            alt={result.name}
-                            cardname={result.name}
-                            race={result.race}
-                            cost={result.cost}
-                            health={result.health}
-                            attack={result.attack}
-                            rarity={result.rarity}
-                            set={result.cardSet}
+                            alt={result.getAttribute('alt')}
+                            cardname={result.getAttribute('cardname')}
+                            race={result.getAttribute('race')}
+                            cost={result.getAttribute('cost')}
+                            health={result.getAttribute('health')}
+                            attack={result.getAttribute('attack')}
+                            rarity={result.getAttribute('rarity')}
+                            set={result.getAttribute('cardSet')}
                             onClick={this.handleClick}
                             onError={(e) => {
                               this.handleImageError(e)
