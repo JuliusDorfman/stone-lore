@@ -21,6 +21,7 @@ export default class Homepage extends Component {
       returnVal: [],
       userCollection: [],
       userDeck: [],
+      userCalculationsArray: [],
       imgError: "/assets/images/404-creature-hstone-light.png"
     }
     this.handleChange = this.handleChange.bind(this);
@@ -29,7 +30,7 @@ export default class Homepage extends Component {
     this.handleCollectionReset = this.handleCollectionReset.bind(this);
     this.handleCollectionSubmit = this.handleCollectionSubmit.bind(this);
     this.handleImageError = this.handleImageError.bind(this);
-    this.removeItemFromUserDeck = this.removeItemFromUserDeck.bind(this);
+    this.removeItemFromUserCollection = this.removeItemFromUserCollection.bind(this);
   }
 
   componentDidMount() {
@@ -53,27 +54,64 @@ export default class Homepage extends Component {
     this.setState({ userDeck: [] })
   }
 
+  singleCardValue(rarityCalculation) {
+    this.rarityCalculation = rarityCalculation;
+  }
+
   handleCollectionSubmit(e) {
     console.log("this.state.userCollection", this.state.userCollection)
     this.setState({ userDeck: this.state.userCollection }, () => {
       console.log("userdeck", this.state.userDeck)
       this.setState({ returnVal: [] })
+
+      if (this.state.userDeck.length >= 5) {
+        let tempCalculationsArray = []
+        this.state.userDeck.map((individualUserDeckCard, index) => {
+          console.log("individualUserDeckCard", individualUserDeckCard)
+          if (!individualUserDeckCard.getAttribute('rarity')) {
+            return tempCalculationsArray.push(0)
+          }
+          if (individualUserDeckCard.getAttribute('rarity').toLowerCase() === "common") {
+            tempCalculationsArray.push(1)
+          }
+          if (individualUserDeckCard.getAttribute('rarity').toLowerCase() === "rare") {
+            tempCalculationsArray.push(2)
+
+          }
+          if (individualUserDeckCard.getAttribute('rarity').toLowerCase() === "epic") {
+            tempCalculationsArray.push(3)
+
+          }
+          if (individualUserDeckCard.getAttribute('rarity').toLowerCase() === "legendary") {
+            tempCalculationsArray.push(4)
+          }
+        })
+        this.setState({ userCalculationsArray: tempCalculationsArray }, () => {
+          console.log("userCalculationsArray", this.state.userCalculationsArray)
+        })
+      } else {
+        console.log("Please submit a minimum of 5 cards")
+      }
     })
   }
 
-  removeItemFromUserDeck(e) {
-    let temporaryUserCollection = [...this.state.userDeck];
-
-    this.state.userCollection.map((collectionItem, index) => {
-      console.log("collectionItem", collectionItem.getAttribute('cardname'))
-      console.log("e.target...", e.target.innerHTML)
-      if (collectionItem.getAttribute('cardname') === e.target.innerHTML) {
-        console.log("match");
-      } else {
-        console.log("nomatch")
-      }
-    })
+  removeItemFromUserCollection(e) {
+    console.log("Todo: remove individual cards via clicking userCollection")
+    // let temporaryUserCollection = [this.state.userCollection];
+    // let selectedCardToRemove = e.target.innerHTML
+    // console.log("temporaryUserCollection", temporaryUserCollection)
+    // this.state.userCollection.forEach((collectionItem, index) => {
+    //   console.log("collectionItem", collectionItem)
+    //   if (collectionItem.getAttribute('cardname') === e.target.innerHTML) {
+    //     temporaryUserCollection = temporaryUserCollection.splice(0, 1, "TESTING", "TESTING")
+    //     console.log("match", temporaryUserCollection)
+    //     return temporaryUserCollection;
+    //   } else {
+    //     console.log("nomatch", temporaryUserCollection)
+    //   }
+    // })
     // this.setState({userCollection: [temporaryUserCollection]})
+    // console.log("userCollection", this.state.userCollection)
   }
 
   handleSubmit(e) {
@@ -106,15 +144,6 @@ export default class Homepage extends Component {
     let rarityValue = this.state.rarityValue;
     let setValue = this.state.setValue;
     let returnVal = this.state.returnVal;
-
-    console.log("cardNameValue", cardNameValue)
-    console.log("raceValue", raceValue)
-    console.log("costValue", costValue)
-    console.log("healthValue", healthValue)
-    console.log("attackValue", attackValue)
-    console.log("rarityValue", rarityValue)
-    console.log("setValue", setValue)
-    console.log("returnVal", returnVal)
 
     if (returnVal) {
       this.setState({ returnVal: [] })
@@ -520,7 +549,7 @@ export default class Homepage extends Component {
                     <li
                       className="user-collection-list-item"
                       key={card.getAttribute('cardname') + index}
-                      onClick={this.removeItemFromUserDeck}
+                      onClick={this.removeItemFromUserCollection}
                     >
                       <p>{card.getAttribute('cardname')}</p>
                     </li>
@@ -599,7 +628,6 @@ export default class Homepage extends Component {
               <ul className="result-list">
                 {
                   this.state.userDeck.map((result, index) => {
-                    console.log("result: ", result)
                     return (
                       <li key={result.name + index}>
                         <h4>{result.name}</h4>
@@ -629,6 +657,16 @@ export default class Homepage extends Component {
                   })
                 }
               </ul>
+              :
+              <span />
+          }
+          {
+            this.state.userCalculationsArray.length !== 0 ?
+              <h2>Current Deck Value: {
+                this.state.userCalculationsArray.reduce((a, b) => {
+                  return a + b
+                })
+              }</h2>
               :
               <span />
           }

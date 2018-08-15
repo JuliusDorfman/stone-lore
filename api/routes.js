@@ -36,7 +36,6 @@ router.get('/standardmeta', (req, res, err) => {
 })
 
 
-
 /*
  * @Route GET /api/routes/:races
  * @Desc GET race
