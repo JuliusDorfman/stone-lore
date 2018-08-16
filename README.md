@@ -1,6 +1,6 @@
 # HStone 
 ## Addiction Sunk Cost Calculator
-[Heroku Link TBA](https://www.linkedin.com/in/juliusgdorfman.com)
+[Heroku Link](http://hstone-app.herokuapp.com)
 
 ## Description
 Hearthstone sunk cost calculator & addiction deterrent

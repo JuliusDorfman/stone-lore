@@ -54,10 +54,6 @@ export default class Homepage extends Component {
     this.setState({ userDeck: [] })
   }
 
-  singleCardValue(rarityCalculation) {
-    this.rarityCalculation = rarityCalculation;
-  }
-
   handleCollectionSubmit(e) {
     console.log("this.state.userCollection", this.state.userCollection)
     this.setState({ userDeck: this.state.userCollection }, () => {
@@ -76,11 +72,9 @@ export default class Homepage extends Component {
           }
           if (individualUserDeckCard.getAttribute('rarity').toLowerCase() === "rare") {
             tempCalculationsArray.push(2)
-
           }
           if (individualUserDeckCard.getAttribute('rarity').toLowerCase() === "epic") {
             tempCalculationsArray.push(3)
-
           }
           if (individualUserDeckCard.getAttribute('rarity').toLowerCase() === "legendary") {
             tempCalculationsArray.push(4)
@@ -611,13 +605,36 @@ export default class Homepage extends Component {
                   <option value="The Witchwood">The Witchwood</option>
                   <option value="The Boomsday Project">The Boomsday Project</option>
                 </select>
-                <hr />
+                <div />
                 <button type="submit" name="search" value="Submit" onClick={this.handleSubmit}>Submit</button>
               </form>
             </div>
-
         }
-        <div className="container img-container">
+        <div className="container">
+          {
+            this.state.userCalculationsArray.length !== 0 ? <span>
+              <h1>Deck Values</h1>
+              <h2>hStone Value: {
+                this.state.userCalculationsArray.reduce((a, b) => {
+                  return a + b
+                })
+              }</h2>
+              <h2>Dollar Value: {
+                this.state.userCalculationsArray.reduce((a, b) => {
+                  return a + b
+                })
+              }</h2>
+              <h2>Win Rate Value: {
+                this.state.userCalculationsArray.reduce((a, b) => {
+                  return a + b
+                })
+              }</h2>
+            </span>
+              :
+              <span />
+          }
+        </div>
+        <div className="container img-container ">
           {
             this.state.userDeck.length === 0 ? <span /> :
               <h4 className="collection-title">Your Collection</h4>
@@ -625,7 +642,7 @@ export default class Homepage extends Component {
           {
             this.state.userDeck !== []
               ?
-              <ul className="result-list">
+              <ul className="result-list your-collection">
                 {
                   this.state.userDeck.map((result, index) => {
                     return (
@@ -657,16 +674,6 @@ export default class Homepage extends Component {
                   })
                 }
               </ul>
-              :
-              <span />
-          }
-          {
-            this.state.userCalculationsArray.length !== 0 ?
-              <h2>Current Deck Value: {
-                this.state.userCalculationsArray.reduce((a, b) => {
-                  return a + b
-                })
-              }</h2>
               :
               <span />
           }
