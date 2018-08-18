@@ -55,6 +55,7 @@ export default class Homepage extends Component {
   }
 
   handleCollectionSubmit(e) {
+
     console.log("this.state.userCollection", this.state.userCollection)
     this.setState({ userDeck: this.state.userCollection }, () => {
       console.log("userdeck", this.state.userDeck)
@@ -64,29 +65,46 @@ export default class Homepage extends Component {
         let tempCalculationsArray = []
         this.state.userDeck.map((individualUserDeckCard, index) => {
           console.log("individualUserDeckCard", individualUserDeckCard)
-          if (!individualUserDeckCard.getAttribute('rarity')) {
-            return tempCalculationsArray.push(0)
+
+          if (!individualUserDeckCard.getAttribute('rarity') || individualUserDeckCard.getAttribute('rarity').toLocaleLowerCase() === "free" || individualUserDeckCard.getAttribute('rarity') === null || individualUserDeckCard.getAttribute('rarity') === undefined) {
+            tempCalculationsArray.push({
+              "rarityCalculation": 0,
+              "valueCalculation": 0
+            })
+          } else if (individualUserDeckCard.getAttribute('rarity').toLowerCase() === "common") {
+            tempCalculationsArray.push({
+              "rarityCalculation": 1,
+              "valueCalculation": Math.floor(Math.random() * (25 - 1) + 1)
+            })
+          } else if (individualUserDeckCard.getAttribute('rarity').toLowerCase() === "rare") {
+            tempCalculationsArray.push({
+              "rarityCalculation": 2,
+              "valueCalculation": Math.floor(Math.random() * (50 - 25) + 25)
+            })
+          } else if (individualUserDeckCard.getAttribute('rarity').toLowerCase() === "epic") {
+            tempCalculationsArray.push({
+              "rarityCalculation": 3,
+              "valueCalculation": Math.floor(Math.random() * (75 - 50) + 50)
+            })
+          } else if (individualUserDeckCard.getAttribute('rarity').toLowerCase() === "legendary") {
+            tempCalculationsArray.push({
+              "rarityCalculation": 4,
+              "valueCalculation": Math.floor(Math.random() * (100 - 75) + 75)
+            })
           }
-          if (individualUserDeckCard.getAttribute('rarity').toLowerCase() === "common") {
-            tempCalculationsArray.push(1)
-          }
-          if (individualUserDeckCard.getAttribute('rarity').toLowerCase() === "rare") {
-            tempCalculationsArray.push(2)
-          }
-          if (individualUserDeckCard.getAttribute('rarity').toLowerCase() === "epic") {
-            tempCalculationsArray.push(3)
-          }
-          if (individualUserDeckCard.getAttribute('rarity').toLowerCase() === "legendary") {
-            tempCalculationsArray.push(4)
-          }
+
+          return tempCalculationsArray
         })
+
         this.setState({ userCalculationsArray: tempCalculationsArray }, () => {
           console.log("userCalculationsArray", this.state.userCalculationsArray)
         })
+
       } else {
         console.log("Please submit a minimum of 5 cards")
       }
     })
+
   }
 
   removeItemFromUserCollection(e) {
@@ -614,21 +632,34 @@ export default class Homepage extends Component {
           {
             this.state.userCalculationsArray.length !== 0 ? <span>
               <h1>Deck Values</h1>
+
               <h2>hStone Value: {
-                this.state.userCalculationsArray.reduce((a, b) => {
-                  return a + b
+                this.state.userCalculationsArray.map((cardObject, index) => {
+                  return cardObject.valueCalculation
+                }).reduce((sum, prev) => {
+                  return (sum + prev)
                 })
               }</h2>
               <h2>Dollar Value: {
-                this.state.userCalculationsArray.reduce((a, b) => {
-                  return a + b
+                this.state.userCalculationsArray.map((cardObject, index) => {
+
                 })
+
               }</h2>
               <h2>Win Rate Value: {
-                this.state.userCalculationsArray.reduce((a, b) => {
-                  return a + b
+                this.state.userCalculationsArray.map((cardObject, index) => {
+
+                })
+
+              }</h2>
+              <h2>Rarity Value: {
+                this.state.userCalculationsArray.map((cardObject, index) => {
+                  return cardObject.rarityCalculation
+                }).reduce((sum, prev) => {
+                  return (sum + prev)
                 })
               }</h2>
+
             </span>
               :
               <span />
