@@ -179,3 +179,8 @@ aside>p {
     transform: rotate(360deg);
   }
 }
+
+.value-wrapper {
+  border: 1px solid rgba(112, 57, 18);
+  background: rgba(243, 187, 90, .3);
+}

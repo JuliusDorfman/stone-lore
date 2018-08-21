@@ -534,6 +534,15 @@ export default class Homepage extends Component {
     }
   }
 
+
+
+  getWinrate() {
+    // TODO: Make Actual Winrate Calculator using *in-meta deck comparison to user collection*
+    let winrateCalculate = (100/(Math.random() * (80 - 75) + 75)).toString().slice(2, 4)
+    return winrateCalculate
+  }
+
+
   handleClick(e) {
     let selectedCard = e.target;
     console.log("selectedCard", selectedCard)
@@ -630,37 +639,50 @@ export default class Homepage extends Component {
         }
         <div className="container">
           {
-            this.state.userCalculationsArray.length !== 0 ? <span>
-              <h1>Deck Values</h1>
+            this.state.userCalculationsArray.length !== 0 ?
 
-              <h2>hStone Value: {
-                this.state.userCalculationsArray.map((cardObject, index) => {
-                  return cardObject.valueCalculation
-                }).reduce((sum, prev) => {
-                  return (sum + prev)
-                })
-              }</h2>
-              <h2>Dollar Value: {
-                this.state.userCalculationsArray.map((cardObject, index) => {
+              <span>
 
-                })
+                <h1>Deck Values</h1>
 
-              }</h2>
-              <h2>Win Rate Value: {
-                this.state.userCalculationsArray.map((cardObject, index) => {
+                <div className="value-wrapper">
+                  <h2>hStone Value: {
+                    this.state.userCalculationsArray.map((cardObject, index) => {
+                      return cardObject.valueCalculation
+                    }).reduce((sum, prev) => {
+                      return (sum + prev)
+                    })
+                  }</h2>
+                </div>
 
-                })
+                <div className="value-wrapper">
+                  <h2>Dollar Value: ${
+                    this.state.userCalculationsArray.map((cardObject, index) => {
+                      return cardObject.rarityCalculation
+                    }).reduce((sum, prev) => {
+                      return Number.parseFloat(sum + prev * Math.random() * (.5 + .1) + .1).toFixed(2)
+                    })
+                  }</h2>
+                </div>
 
-              }</h2>
-              <h2>Rarity Value: {
-                this.state.userCalculationsArray.map((cardObject, index) => {
-                  return cardObject.rarityCalculation
-                }).reduce((sum, prev) => {
-                  return (sum + prev)
-                })
-              }</h2>
+                <div className="value-wrapper">
+                  <h2>Win Rate Value: {
+                    this.getWinrate()
+                  }%</h2>
+                </div>
 
-            </span>
+                <div className="value-wrapper">
+                  <h2>Rarity Value: {
+                    this.state.userCalculationsArray.map((cardObject, index) => {
+                      return cardObject.rarityCalculation
+                    }).reduce((sum, prev) => {
+                      return (sum + prev)
+                    })
+                  }</h2>
+                </div>
+
+              </span>
+
               :
               <span />
           }
