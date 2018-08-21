@@ -40,6 +40,12 @@ select {
   color: rgba(164, 69, 30, .6);
 }
 
+.results-container {
+  border-radius: 12px;
+  background: rgba(243, 187, 90, .3);
+  border: 1px solid rgba(112, 57, 18);
+}
+
 .result-list {
   display: grid;
   justify-content: center;
@@ -150,7 +156,7 @@ aside>p {
 .your-collection {
   border-radius: 12px;
   background: rgba(167, 81, 50, 0.3);
-  border: 1px solid gray;
+  border: 1px solid rgba(112, 57, 18);
 }
 
 /* Spinner */
@@ -180,7 +186,20 @@ aside>p {
   }
 }
 
+.values-container {
+  padding: 1%;
+  margin-bottom: 100px;
+  border-radius: 3px;
+  color: rgba(90, 49, 20, 1);
+  border: 1px solid rgba(112, 57, 18);
+  background: rgba(243, 187, 90, .3);
+}
+
 .value-wrapper {
+  display: inline-block;
+  margin: 12px;
+  padding: 1%;
+  border-radius: 3px;
   border: 1px solid rgba(112, 57, 18);
   background: rgba(243, 187, 90, .3);
 }

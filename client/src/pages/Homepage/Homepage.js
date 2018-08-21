@@ -22,6 +22,7 @@ export default class Homepage extends Component {
       userCollection: [],
       userDeck: [],
       userCalculationsArray: [],
+      winRateCalculate: '',
       imgError: "/assets/images/404-creature-hstone-light.png"
     }
     this.handleChange = this.handleChange.bind(this);
@@ -92,14 +93,13 @@ export default class Homepage extends Component {
               "valueCalculation": Math.floor(Math.random() * (100 - 75) + 75)
             })
           }
-
           return tempCalculationsArray
         })
 
         this.setState({ userCalculationsArray: tempCalculationsArray }, () => {
           console.log("userCalculationsArray", this.state.userCalculationsArray)
         })
-
+        
       } else {
         console.log("Please submit a minimum of 5 cards")
       }
@@ -512,14 +512,15 @@ export default class Homepage extends Component {
         }
       }
     }
+    this.getWinrate()
   }
 
 
 
   getWinrate() {
     // TODO: Make Actual Winrate Calculator using *in-meta deck comparison to user collection*
-    let winrateCalculate = (100/(Math.random() * (80 - 75) + 75)).toString().slice(2, 4)
-    return winrateCalculate
+    let winRateCalculate = (100 / (Math.random() * (80 - 75) + 75)).toString().slice(2, 4)
+    return this.setState({ winRateCalculate: winRateCalculate })
   }
 
 
@@ -621,7 +622,7 @@ export default class Homepage extends Component {
           {
             this.state.userCalculationsArray.length !== 0 ?
 
-              <span>
+              <div className="container values-container">
 
                 <h1>Deck Values</h1>
 
@@ -647,7 +648,7 @@ export default class Homepage extends Component {
 
                 <div className="value-wrapper">
                   <h2>Win Rate Value: {
-                    this.getWinrate()
+                    this.state.winRateCalculate
                   }%</h2>
                 </div>
 
@@ -661,7 +662,7 @@ export default class Homepage extends Component {
                   }</h2>
                 </div>
 
-              </span>
+              </div>
 
               :
               <span />
@@ -669,30 +670,69 @@ export default class Homepage extends Component {
         </div>
         <div className="container img-container ">
           {
-            this.state.userDeck.length === 0 ? <span /> :
-              <h4 className="collection-title">Your Collection</h4>
+            this.state.userDeck.length !== 0
+              ?
+              <div>
+                <h4 className="collection-title">Your Collection</h4>
+                <ul className="result-list your-collection">
+                  {
+                    this.state.userDeck.map((result, index) => {
+                      return (
+                        <li key={result.name + index}>
+                          <h4>{result.name}</h4>
+                          {
+                            <img
+                              src={result.src ? result.src : this.state.imgError}
+                              key={result.cardId + index}
+                              alt={result.getAttribute('alt')}
+                              cardname={result.getAttribute('cardname')}
+                              race={result.getAttribute('race')}
+                              cost={result.getAttribute('cost')}
+                              health={result.getAttribute('health')}
+                              attack={result.getAttribute('attack')}
+                              rarity={result.getAttribute('rarity')}
+                              set={result.getAttribute('cardSet')}
+                              onClick={this.handleClick}
+                              onError={(e) => {
+                                this.handleImageError(e)
+                                e.target.src = this.state.imgError;
+                              }
+                              } />
+                          }
+                          <p>Set: {result.cardSet}</p>
+                          <p>Rarity: {result.rarity ? result.rarity : "Non Collectable"}</p>
+                        </li>
+                      )
+                    })
+                  }
+                </ul>
+              </div>
+              :
+              <span />
           }
           {
-            this.state.userDeck !== []
+            this.state.returnVal.length !== 0
               ?
-              <ul className="result-list your-collection">
-                {
-                  this.state.userDeck.map((result, index) => {
+              <div className="results-container">
+                <h4 className="search-results-title">Search Results</h4>
+
+                <ul className="result-list">
+                  {this.state.returnVal.map((result, index) => {
                     return (
                       <li key={result.name + index}>
                         <h4>{result.name}</h4>
                         {
                           <img
-                            src={result.src ? result.src : this.state.imgError}
+                            src={result.img ? result.img : this.state.imgError}
                             key={result.cardId + index}
-                            alt={result.getAttribute('alt')}
-                            cardname={result.getAttribute('cardname')}
-                            race={result.getAttribute('race')}
-                            cost={result.getAttribute('cost')}
-                            health={result.getAttribute('health')}
-                            attack={result.getAttribute('attack')}
-                            rarity={result.getAttribute('rarity')}
-                            set={result.getAttribute('cardSet')}
+                            alt={result.name}
+                            cardname={result.name}
+                            race={result.race}
+                            cost={result.cost}
+                            health={result.health}
+                            attack={result.attack}
+                            rarity={result.rarity}
+                            set={result.cardSet}
                             onClick={this.handleClick}
                             onError={(e) => {
                               this.handleImageError(e)
@@ -705,52 +745,9 @@ export default class Homepage extends Component {
                       </li>
                     )
                   })
-                }
-              </ul>
-              :
-              <span />
-          }
-          {
-            this.state.returnVal.length === 0 ? <span /> : (
-              <div>
-                <h4 className="search-results-title">Search Results: </h4>
+                  }
+                </ul>
               </div>
-            )
-          }
-          {
-            this.state.returnVal
-              ?
-              <ul className="result-list">
-                {this.state.returnVal.map((result, index) => {
-                  return (
-                    <li key={result.name + index}>
-                      <h4>{result.name}</h4>
-                      {
-                        <img
-                          src={result.img ? result.img : this.state.imgError}
-                          key={result.cardId + index}
-                          alt={result.name}
-                          cardname={result.name}
-                          race={result.race}
-                          cost={result.cost}
-                          health={result.health}
-                          attack={result.attack}
-                          rarity={result.rarity}
-                          set={result.cardSet}
-                          onClick={this.handleClick}
-                          onError={(e) => {
-                            this.handleImageError(e)
-                            e.target.src = this.state.imgError;
-                          }
-                          } />
-                      }
-                      <p>Set: {result.cardSet}</p>
-                      <p>Rarity: {result.rarity ? result.rarity : "Non Collectable"}</p>
-                    </li>
-                  )
-                })
-                }
-              </ul>
               :
               <span />
           }
