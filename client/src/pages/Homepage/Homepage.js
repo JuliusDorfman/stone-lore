@@ -49,13 +49,13 @@ export default class Homepage extends Component {
   }
 
   handleCollectionReset(e) {
-    this.setState({ returnVal: [] })
-    this.setState({ userCollection: [] })
-    this.setState({ userDeck: [] })
+    this.setState({ returnVal: [] });
+    this.setState({ userCollection: [] });
+    this.setState({ userDeck: [] });
+    this.setState({ userCalculationsArray: [] });
   }
 
   handleCollectionSubmit(e) {
-
     console.log("this.state.userCollection", this.state.userCollection)
     this.setState({ userDeck: this.state.userCollection }, () => {
       console.log("userdeck", this.state.userDeck)
@@ -136,9 +136,6 @@ export default class Homepage extends Component {
     this.setState({ attackValue: "" })
     this.setState({ rarityValue: "" })
     this.setState({ setValue: "" })
-
-    console.log("submit CostValue", this.state.costValue)
-
     document.getElementById("hstone-search").reset();
   }
 
@@ -199,13 +196,12 @@ export default class Homepage extends Component {
               )
             }
           })
-          console.log("race", this.state.returnVal)
+          console.log("race")
         }
 
         // @Desc This will Render all Card with value of COSTVALUE
         if (costValue && !cardNameValue && !raceValue && !healthValue && !attackValue && !rarityValue) {
           singleSet.forEach((singleCard, index) => {
-            console.log("cost", singleCard.cost)
             if (parseInt(costValue, 10) === parseInt(singleCard.cost, 10)) {
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
@@ -213,13 +209,12 @@ export default class Homepage extends Component {
               ))
             }
           })
-          console.log("cost", this.state.returnVal)
+          console.log("cost")
         }
 
         // @Desc This will Render all Card with value of AttackValue
         if (attackValue && !cardNameValue && !raceValue && !costValue && !healthValue) {
           singleSet.forEach((singleCard, index) => {
-            console.log("attack", singleCard.attack)
             if (parseInt(attackValue, 10) === parseInt(singleCard.attack, 10)) {
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
@@ -227,19 +222,19 @@ export default class Homepage extends Component {
               ))
             }
           })
-          console.log("attackValue", this.state.returnVal)
+          console.log("attackValue")
         }
 
         // @Desc This will Render all Card with value of HealthValue
         if (healthValue && !cardNameValue && !raceValue && !costValue && !attackValue && !rarityValue) {
           singleSet.forEach((singleCard, index) => {
-            console.log("health", singleCard.health)
             if (parseInt(healthValue, 10) === parseInt(singleCard.health, 10)) {
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
           })
+          console.log("healthValue")
         }
 
         // @Desc This will Render all Card with value of rarityValue
@@ -248,7 +243,6 @@ export default class Homepage extends Component {
             if (singleCard.rarity === undefined) {
               return null
             }
-            console.log("rarity", singleCard.rarity)
             if (rarityValue === singleCard.rarity.toLowerCase()) {
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
@@ -256,6 +250,7 @@ export default class Homepage extends Component {
               ))
             }
           })
+          console.log("rarityValue")
         }
 
         // @Desc This will Render all Cards with value of raceValue && cardValue
@@ -268,13 +263,12 @@ export default class Homepage extends Component {
               return null
             }
             if (raceValue === singleCard.race.toLowerCase() && parseInt(costValue, 10) === parseInt(singleCard.cost, 10)) {
-              console.log(singleCard.race + " " + singleCard.cost)
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
           })
-          console.log("race & cost", this.state.returnVal)
+          console.log("race & cost")
         }
 
         // @Desc This will Render all Cards with value of raceValue && healthValue
@@ -287,13 +281,12 @@ export default class Homepage extends Component {
               return null
             }
             if (raceValue === singleCard.race.toLowerCase() && parseInt(healthValue, 10) === parseInt(singleCard.health, 10)) {
-              console.log(singleCard.race + " " + singleCard.health)
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
           })
-          console.log("race & health", this.state.returnVal)
+          console.log("race & health")
         }
 
         // @Desc This will Render all Cards with value of raceValue && attackValue
@@ -306,20 +299,16 @@ export default class Homepage extends Component {
               return null
             }
             if (raceValue === singleCard.race.toLowerCase() && parseInt(attackValue, 10) === parseInt(singleCard.attack, 10)) {
-              console.log(singleCard.race + " " + singleCard.attack)
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
           })
-          console.log("race & attack", this.state.returnVal)
+          console.log("race & attack")
         }
 
         // @Desc This will Render all Cards with value of raceValue && rarityValue
         if (raceValue && rarityValue && !cardNameValue && !costValue && !attackValue && !healthValue) {
-          console.log(raceValue)
-          console.log(rarityValue)
-          console.log(cardNameValue)
           singleSet.forEach((singleCard, index) => {
             if (singleCard.race === undefined) {
               return null
@@ -328,13 +317,12 @@ export default class Homepage extends Component {
               return null
             }
             if (raceValue === singleCard.race.toLowerCase() && rarityValue.toLowerCase() === singleCard.rarity.toLowerCase()) {
-              console.log(singleCard.race + " " + singleCard.rarity)
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
           })
-          console.log("race & rarity", this.state.returnVal)
+          console.log("race & rarity")
         }
 
         // @Desc This will Render all Cards with value of costValue && healthValue
@@ -347,13 +335,12 @@ export default class Homepage extends Component {
               return null
             }
             if (parseInt(costValue, 10) === parseInt(singleCard.cost, 10) && parseInt(healthValue, 10) === parseInt(singleCard.health, 10)) {
-              console.log(singleCard.cost + "ok" + singleCard.health)
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
           })
-          console.log("cost & health", this.state.returnVal)
+          console.log("cost & health")
         }
 
         // @Desc This will Render all Cards with value of costValue && attackValue
@@ -366,13 +353,12 @@ export default class Homepage extends Component {
               return null
             }
             if (parseInt(costValue, 10) === parseInt(singleCard.cost, 10) && parseInt(attackValue, 10) === parseInt(singleCard.attack, 10)) {
-              console.log(singleCard.cost + "ok" + singleCard.attack)
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
           })
-          console.log("cost & attack", this.state.returnVal)
+          console.log("cost & attack")
         }
 
         // @Desc This will Render all Cards with value of costValue && raceValue
@@ -385,13 +371,12 @@ export default class Homepage extends Component {
               return null
             }
             if (parseInt(costValue, 10) === parseInt(singleCard.cost, 10) && raceValue === singleCard.race.toLowerCase()) {
-              console.log(singleCard.cost + "ok" + singleCard.race)
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
           })
-          console.log("cost & race", this.state.returnVal)
+          console.log("cost & race")
         }
 
         // @Desc This will Render all Cards with value of healthValue && attackValue
@@ -404,13 +389,12 @@ export default class Homepage extends Component {
               return null
             }
             if (parseInt(healthValue, 10) === parseInt(singleCard.health, 10) && parseInt(attackValue, 10) === parseInt(singleCard.attack, 10)) {
-              console.log(singleCard.health + "ok" + singleCard.attack)
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
           })
-          console.log("health & attack", this.state.returnVal)
+          console.log("health & attack")
         }
 
 
@@ -424,13 +408,12 @@ export default class Homepage extends Component {
               return null
             }
             if (parseInt(costValue, 10) === parseInt(singleCard.cost, 10) && rarityValue.toLowerCase() === singleCard.rarity.toLowerCase()) {
-              console.log(singleCard.cost + "ok" + singleCard.rarity)
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
           })
-          console.log("cost & rarity", this.state.returnVal)
+          console.log("cost & rarity")
         }
 
         // @Desc This will Render all Cards with value of healthValue && attackValue
@@ -443,13 +426,12 @@ export default class Homepage extends Component {
               return null
             }
             if (parseInt(healthValue, 10) === parseInt(singleCard.health, 10) && parseInt(attackValue, 10) === parseInt(singleCard.attackattackValue, 10)) {
-              console.log(singleCard.health + "ok" + singleCard.attack)
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
           })
-          console.log("health & attack", this.state.returnVal)
+          console.log("health & attack")
         }
 
         // @Desc This will Render all Cards with value of costValue && healthValue && attackValue
@@ -489,13 +471,12 @@ export default class Homepage extends Component {
               return null
             }
             if (parseInt(costValue, 10) === parseInt(singleCard.cost, 10) && parseInt(healthValue, 10) === parseInt(singleCard.health, 10) && parseInt(attackValue, 10) === parseInt(singleCard.attack, 10) && raceValue === singleCard.race.toLowerCase()) {
-              console.log(singleCard.health + " " + singleCard.attack + " " + singleCard.cost + " " + singleCard.race)
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
               }))
             }
           })
-          console.log("health & cost & attack & race", this.state.returnVal)
+          console.log("health & cost & attack & race")
         }
 
         // @Desc This will Render all Cards with value of raceValue && costValue && healthValue && attackValue && rarityValue
@@ -522,7 +503,6 @@ export default class Homepage extends Component {
               && raceValue === singleCard.race.toLowerCase()
               && rarityValue === singleCard.rarity.toLowerCase()
             ) {
-              console.log(singleCard.health + " " + singleCard.attack + " " + singleCard.cost + " " + singleCard.race + " " + singleCard.rarity)
               this.setState(prevState => ({
                 returnVal: [...prevState.returnVal, singleCard]
               }))
