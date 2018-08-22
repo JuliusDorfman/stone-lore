@@ -9,6 +9,8 @@ export default class Homepage extends Component {
     super(props);
     this.state = {
       loadingData: false,
+      showInstructions: true,
+      showForm: true,
       completeCardListBySet: [],
       standardMetaCardList: '',
       cardNameValue: '',
@@ -28,6 +30,8 @@ export default class Homepage extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleShowInstructions = this.handleShowInstructions.bind(this);
+    this.handleShowForm = this.handleShowForm.bind(this);
     this.handleCollectionReset = this.handleCollectionReset.bind(this);
     this.handleCollectionSubmit = this.handleCollectionSubmit.bind(this);
     this.handleImageError = this.handleImageError.bind(this);
@@ -104,7 +108,7 @@ export default class Homepage extends Component {
         console.log("Please submit a minimum of 5 cards")
       }
     })
-
+    this.getWinrate()
   }
 
   removeItemFromUserCollection(e) {
@@ -512,13 +516,42 @@ export default class Homepage extends Component {
         }
       }
     }
-    this.getWinrate()
   }
 
   getWinrate() {
     // TODO: Make Actual Winrate Calculator using *in-meta deck comparison to user collection*
     let winRateCalculate = (100 / (Math.random() * (80 - 75) + 75)).toString().slice(2, 4)
     return this.setState({ winRateCalculate: winRateCalculate })
+  }
+
+  handleShowInstructions(e) {
+    let instructionsElement = document.getElementsByClassName('instructions-detail')[0];
+    if (this.state.showInstructions === false) {
+      this.setState({ showInstructions: true })
+    } else {
+      this.setState({ showInstructions: false })
+    }
+
+    if (this.state.showInstructions) {
+      instructionsElement.style.display = "none";
+    } else {
+      instructionsElement.style.display = "inline";
+    }
+  }
+
+  handleShowForm(e) {
+    let formElement = document.getElementById('hstone-search');
+    if (this.state.showForm === false) {
+      this.setState({ showForm: true })
+    } else {
+      this.setState({ showForm: false })
+    }
+
+    if (this.state.showForm) {
+      formElement.style.display = "none";
+    } else {
+      formElement.style.display = "grid";
+    }
   }
 
   handleClick(e) {
@@ -566,17 +599,27 @@ export default class Homepage extends Component {
         </div>
 
         <div className="container homepage-landing-header">
-          <h1>Homepage</h1>
-          <p className="homepage-landing-intro">Crush your Addiction</p>
+          <h1>hStone</h1>
+          <p className="homepage-landing-intro">Crush your Hearthstone Addiction</p>
         </div>
 
         <div className="container">
-          <p>Instructions</p>
-          <p>1. Search (No Fields Are Required)</p>
-          <p>2. Choose 30 cards</p>
-          <p>3. Click Submit at Bottom of Deck Tracker</p>
+          <div className="instructions">
+            <h4>
+              <span
+                className="show-button"
+                onClick={this.handleShowInstructions}>
+                +
+            </span>
+              &nbsp;&nbsp;&nbsp;Instructions
+          </h4>
+            <span className="instructions-detail">
+              <p>1. Search (No Fields Are Required)</p>
+              <p>2. Choose 30 cards</p>
+              <p>3. Click Submit at Bottom of Deck Tracker</p>
+            </span>
+          </div>
         </div>
-
         {
           this.state.loadingData
             ?
@@ -585,34 +628,44 @@ export default class Homepage extends Component {
               <img className="loading-spinner" src="/assets/images/hstone-logo.png" alt="site-logo" style={{ height: "150px", width: "150px" }} />
             </div>
             :
-            <div className="container form-container">
-              <form id="hstone-search" className="search-form">
-                <label htmlFor="cardNameValue">Card Name</label>
-                <input type="text" name="cardNameValue" placeholder="e.g Emeriss, Woecleaver, Hogger " value={this.state.cardNameValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
-                <label htmlFor="raceValue">Race</label>
-                <input type="text" name="raceValue" placeholder="e.g. Murloc/Demon/Dragon/ect..." value={this.state.raceValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
-                <label htmlFor="costValue">Cost</label>
-                <input type="number" name="costValue" placeholder="Integer" value={this.state.costValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
-                <label htmlFor="healthValue">Health</label>
-                <input type="number" name="healthValue" placeholder="Integer" value={this.state.healthValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
-                <label htmlFor="attackValue">Attack</label>
-                <input type="number" name="attackValue" placeholder="Integer" value={this.state.attackValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
-                <label htmlFor="rarityValue">Rarity</label>
-                <input type="text" name="rarityValue" placeholder="e.g. Common/Rare/Epic/Legendary" value={this.state.rarityValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
-                <label htmlFor="setValue">Set</label>
-                <select name="setValue" placeholder="Optional" value={this.state.setValue} className="form-values" onChange={this.handleChange}>
-                  <option placeholder="Optional">Optional</option>
-                  <option value="Basic">Basic</option>
-                  <option value="Classic">Classic</option>
-                  <option value="Journey to Un'Goro">Journey to Un'Goro</option>
-                  <option value="Knights of the Frozen Throne">Knights of the Frozen Throne</option>
-                  <option value="Kobolds & Catacombs">Kobolds & Catacombs</option>
-                  <option value="The Witchwood">The Witchwood</option>
-                  <option value="The Boomsday Project">The Boomsday Project</option>
-                </select>
-                <div />
-                <button type="submit" name="search" value="Submit" onClick={this.handleSubmit}>Submit</button>
-              </form>
+            <div className="container">
+              <div className="form-container">
+                <h4>
+                  <span
+                    className="show-button"
+                    onClick={this.handleShowForm}>
+                    +
+            </span>
+                  &nbsp;&nbsp;&nbsp;Card Search
+            </h4>
+                <form id="hstone-search" className="search-form">
+                  <label htmlFor="cardNameValue">Card Name</label>
+                  <input type="text" name="cardNameValue" placeholder="e.g Emeriss, Woecleaver, Hogger " value={this.state.cardNameValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
+                  <label htmlFor="raceValue">Race</label>
+                  <input type="text" name="raceValue" placeholder="e.g. Murloc/Demon/Dragon/ect..." value={this.state.raceValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
+                  <label htmlFor="costValue">Cost</label>
+                  <input type="number" name="costValue" placeholder="Integer" value={this.state.costValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
+                  <label htmlFor="healthValue">Health</label>
+                  <input type="number" name="healthValue" placeholder="Integer" value={this.state.healthValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
+                  <label htmlFor="attackValue">Attack</label>
+                  <input type="number" name="attackValue" placeholder="Integer" value={this.state.attackValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
+                  <label htmlFor="rarityValue">Rarity</label>
+                  <input type="text" name="rarityValue" placeholder="e.g. Common/Rare/Epic/Legendary" value={this.state.rarityValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
+                  <label htmlFor="setValue">Set</label>
+                  <select name="setValue" placeholder="Optional" value={this.state.setValue} className="form-values" onChange={this.handleChange}>
+                    <option placeholder="Optional">Optional</option>
+                    <option value="Basic">Basic</option>
+                    <option value="Classic">Classic</option>
+                    <option value="Journey to Un'Goro">Journey to Un'Goro</option>
+                    <option value="Knights of the Frozen Throne">Knights of the Frozen Throne</option>
+                    <option value="Kobolds & Catacombs">Kobolds & Catacombs</option>
+                    <option value="The Witchwood">The Witchwood</option>
+                    <option value="The Boomsday Project">The Boomsday Project</option>
+                  </select>
+                  <div />
+                  <button type="submit" name="search" value="Submit" onClick={this.handleSubmit}>Submit</button>
+                </form>
+              </div>
             </div>
         }
         <div className="container">
@@ -620,9 +673,7 @@ export default class Homepage extends Component {
             this.state.userCalculationsArray.length !== 0 ?
 
               <div className="container values-container">
-
                 <h1>Deck Values</h1>
-
                 <div className="value-wrapper">
                   <h2>hStone Value: {
                     this.state.userCalculationsArray.map((cardObject, index) => {

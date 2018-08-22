@@ -1,10 +1,14 @@
 .form-container {
   display: inline-block;
-  margin: 100px;
-  padding: 30px;
+  padding: 1%;
   border-radius: 12px;
   background: rgba(243, 187, 90, .3);
   border: 1px solid rgba(112, 57, 18);
+}
+
+.form-container>h4 {
+  margin-top: 2px;
+  color: rgba(120, 20, 5, 1);
 }
 
 form {
@@ -17,12 +21,42 @@ form {
   text-align: center;
 }
 
+.homepage-landing-header>h1 {
+  font-family: 'Uncial Antiqua', cursive;
+  font-size: 70px;
+  margin: 24px;
+}
+
+.instructions {
+  display: inline-block;
+  color: rgba(120, 20, 5, 1);
+  background: rgba(243, 187, 90, .3);
+  border: 1px solid rgba(112, 57, 18);
+  border-radius: 12px;
+  padding: 1%;
+}
+
+.instructions>p {
+display: inline-block;
+}
+
+.instructions>h4 {
+  margin-top: 2px;
+}
+
+.show-button {
+  cursor: pointer;
+  font-size: 25px;
+  animation: rotateForty .75s infinite linear;
+}
+
 .search-form {
   width: 400px;
 }
 
 .search-form>label {
   color: rgba(130, 49, 20, 1);
+  padding-left: 15px;
 }
 
 .search-form>input,
@@ -34,6 +68,10 @@ select {
 
 .search-form>select {
   color: rgba(164, 69, 30, .6);
+}
+
+.search-form>button {
+  width: 50%;
 }
 
 .search-form>input::placeholder {
@@ -203,4 +241,13 @@ aside>p {
   border-radius: 3px;
   border: 1px solid rgba(112, 57, 18);
   background: rgba(243, 187, 90, .3);
+}
+
+@keyframes rotateForty {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(90deg);
+  }
 }
