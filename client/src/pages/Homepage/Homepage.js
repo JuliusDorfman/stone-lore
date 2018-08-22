@@ -99,7 +99,7 @@ export default class Homepage extends Component {
         this.setState({ userCalculationsArray: tempCalculationsArray }, () => {
           console.log("userCalculationsArray", this.state.userCalculationsArray)
         })
-        
+
       } else {
         console.log("Please submit a minimum of 5 cards")
       }
@@ -515,14 +515,11 @@ export default class Homepage extends Component {
     this.getWinrate()
   }
 
-
-
   getWinrate() {
     // TODO: Make Actual Winrate Calculator using *in-meta deck comparison to user collection*
     let winRateCalculate = (100 / (Math.random() * (80 - 75) + 75)).toString().slice(2, 4)
     return this.setState({ winRateCalculate: winRateCalculate })
   }
-
 
   handleClick(e) {
     let selectedCard = e.target;
@@ -573,12 +570,12 @@ export default class Homepage extends Component {
           <p className="homepage-landing-intro">Crush your Addiction</p>
         </div>
 
-        <details className="container">
-          <summary>Instructions</summary>
+        <div className="container">
+          <p>Instructions</p>
           <p>1. Search (No Fields Are Required)</p>
           <p>2. Choose 30 cards</p>
           <p>3. Click Submit at Bottom of Deck Tracker</p>
-        </details>
+        </div>
 
         {
           this.state.loadingData
@@ -672,9 +669,9 @@ export default class Homepage extends Component {
           {
             this.state.userDeck.length !== 0
               ?
-              <div>
+              <div className="results-your-collection-container">
                 <h4 className="collection-title">Your Collection</h4>
-                <ul className="result-list your-collection">
+                <ul className="result-list">
                   {
                     this.state.userDeck.map((result, index) => {
                       return (

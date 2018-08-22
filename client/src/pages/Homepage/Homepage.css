@@ -91,6 +91,7 @@ select {
 .deck-component {
   display: absolute;
   position: fixed;
+  top: 75px;
   right: 0;
   height: 80vh;
   width: 120px;
@@ -153,7 +154,7 @@ aside>p {
   display: inline;
 }
 
-.your-collection {
+.results-your-collection-container {
   border-radius: 12px;
   background: rgba(167, 81, 50, 0.3);
   border: 1px solid rgba(112, 57, 18);
