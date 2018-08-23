@@ -1,9 +1,11 @@
 .header-component {
   background: rgba(47, 45, 184, 0.7);
+  padding: 0 50px;
 }
 
 .navbar {
   text-align: left;
+  padding-left: 30px;
   height: 42px;
   margin: 0px;
   border-bottom: 1px solid #130f30;

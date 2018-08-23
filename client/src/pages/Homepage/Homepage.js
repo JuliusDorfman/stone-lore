@@ -571,9 +571,8 @@ export default class Homepage extends Component {
 
         <Header />
         <div className="deck-component">
-          <aside className="user-collection">
+          <div className="user-collection">
             <p>Your Collection</p>
-            <hr />
             <ul className="user-collection-list">
               {this.state.userCollection.map(
                 (card, index) => {
@@ -590,12 +589,11 @@ export default class Homepage extends Component {
               )}
             </ul>
             <div className="card-count">
-              <hr />
               <p>Cards: {this.state.userCollection.length}/30</p>
               <button onClick={this.handleCollectionSubmit}>Submit Selection</button>
               <button onClick={this.handleCollectionReset}>Reset Selection</button>
             </div>
-          </aside>
+          </div>
         </div>
 
         <div className="container homepage-landing-header">
@@ -663,7 +661,10 @@ export default class Homepage extends Component {
                     <option value="The Boomsday Project">The Boomsday Project</option>
                   </select>
                   <div />
-                  <button type="submit" name="search" value="Submit" onClick={this.handleSubmit}>Submit</button>
+                  <span className="form-button">
+                    <img className="hearthstone-button-image" src="/assets/images/hearthstone-button-template.png" alt="button" />
+                    <button type="submit" name="search" value="Submit" onClick={this.handleSubmit}>Submit</button>
+                  </span>
                 </form>
               </div>
             </div>
