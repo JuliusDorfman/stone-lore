@@ -11,6 +11,8 @@ export default class Homepage extends Component {
       loadingData: false,
       showInstructions: true,
       showForm: true,
+      showDeckValues: true,
+      showUserCollection: true,
       completeCardListBySet: [],
       standardMetaCardList: '',
       cardNameValue: '',
@@ -25,13 +27,17 @@ export default class Homepage extends Component {
       userDeck: [],
       userCalculationsArray: [],
       winRateCalculate: '',
-      imgError: "/assets/images/404-creature-hstone-light.png"
+      dollarValueCalculate: '',
+      imgError: "/assets/images/404-creature-hstone-light.png",
+      minimumMessage: ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleShowInstructions = this.handleShowInstructions.bind(this);
     this.handleShowForm = this.handleShowForm.bind(this);
+    this.handleShowDeckValues = this.handleShowDeckValues.bind(this);
+    this.handleShowUserCollection = this.handleShowUserCollection.bind(this);
     this.handleCollectionReset = this.handleCollectionReset.bind(this);
     this.handleCollectionSubmit = this.handleCollectionSubmit.bind(this);
     this.handleImageError = this.handleImageError.bind(this);
@@ -66,7 +72,7 @@ export default class Homepage extends Component {
       console.log("userdeck", this.state.userDeck)
       this.setState({ returnVal: [] })
 
-      if (this.state.userDeck.length >= 5) {
+      if (this.state.userDeck.length >= 10) {
         let tempCalculationsArray = []
         this.state.userDeck.map((individualUserDeckCard, index) => {
           console.log("individualUserDeckCard", individualUserDeckCard)
@@ -101,14 +107,20 @@ export default class Homepage extends Component {
         })
 
         this.setState({ userCalculationsArray: tempCalculationsArray }, () => {
-          console.log("userCalculationsArray", this.state.userCalculationsArray)
+          this.getWinrate();
+          this.getDollarValue();
         })
 
+        this.setState({ minimumMessage: '' })
+
       } else {
-        console.log("Please submit a minimum of 5 cards")
+        const minimumRequired = <div className="minimum-warning">Please enter a minimum of 10 cards.</div>
+        return this.setState({
+          minimumMessage: minimumRequired
+        })
       }
     })
-    this.getWinrate()
+
   }
 
   removeItemFromUserCollection(e) {
@@ -524,6 +536,18 @@ export default class Homepage extends Component {
     return this.setState({ winRateCalculate: winRateCalculate })
   }
 
+  getDollarValue() {
+    let dollarVal = '';
+    this.state.userCalculationsArray.map((cardObject, index) => {
+      console.log("cardObject.rarityCalculation", cardObject.rarityCalculation)
+      return cardObject.rarityCalculation
+    }).reduce((sum, prev) => {
+      dollarVal = Number.parseFloat(sum + prev * Math.random() * (.5 + .1) + .1).toFixed(2)
+      this.setState({ dollarValueCalculate: dollarVal })
+      return dollarVal
+    })
+  }
+
   handleShowInstructions(e) {
     let instructionsElement = document.getElementsByClassName('instructions-detail')[0];
     if (this.state.showInstructions === false) {
@@ -541,6 +565,37 @@ export default class Homepage extends Component {
 
   handleShowForm(e) {
     let formElement = document.getElementById('hstone-search');
+    if (this.state.showForm === false) {
+      this.setState({ showForm: true })
+    } else {
+      this.setState({ showForm: false })
+    }
+
+    if (this.state.showForm) {
+      formElement.style.display = "none";
+    } else {
+      formElement.style.display = "grid";
+    }
+  }
+
+  handleShowDeckValues(e) {
+    let formElement = document.getElementsByClassName('values-display-wrapper')[0];
+    if (this.state.showForm === false) {
+      this.setState({ showForm: true })
+    } else {
+      this.setState({ showForm: false })
+    }
+
+    if (this.state.showForm) {
+      formElement.style.display = "none";
+    } else {
+      formElement.style.display = "inline-block";
+    }
+  }
+
+  handleShowUserCollection(e) {
+    console.log("showUserCollcetion")
+    let formElement = document.getElementsByClassName('user-collection-show')[0];
     if (this.state.showForm === false) {
       this.setState({ showForm: true })
     } else {
@@ -603,12 +658,12 @@ export default class Homepage extends Component {
 
         <div className="container">
           <div className="instructions">
-            <h4>
-              <span
-                className="show-button"
-                onClick={this.handleShowInstructions}>
-                +
+            <span
+              className="show-button"
+              onClick={this.handleShowInstructions}>
+              +
             </span>
+            <h4>
               &nbsp;&nbsp;&nbsp;Instructions
           </h4>
             <span className="instructions-detail">
@@ -628,14 +683,14 @@ export default class Homepage extends Component {
             :
             <div className="container">
               <div className="form-container">
+                <span
+                  className="show-button"
+                  onClick={this.handleShowForm}>
+                  +
+                  </span>
                 <h4>
-                  <span
-                    className="show-button"
-                    onClick={this.handleShowForm}>
-                    +
-            </span>
                   &nbsp;&nbsp;&nbsp;Card Search
-            </h4>
+                </h4>
                 <form id="hstone-search" className="search-form">
                   <label htmlFor="cardNameValue">Card Name</label>
                   <input type="text" name="cardNameValue" placeholder="e.g Emeriss, Woecleaver, Hogger " value={this.state.cardNameValue} className="form-values" onChange={this.handleChange} autoComplete="off" />
@@ -670,47 +725,54 @@ export default class Homepage extends Component {
             </div>
         }
         <div className="container">
+          {this.state.minimumMessage}
+        </div>
+        <div className="container">
           {
             this.state.userCalculationsArray.length !== 0 ?
 
-              <div className="container values-container">
-                <h1>Deck Values</h1>
-                <div className="value-wrapper">
-                  <h2>hStone Value: {
-                    this.state.userCalculationsArray.map((cardObject, index) => {
-                      return cardObject.valueCalculation
-                    }).reduce((sum, prev) => {
-                      return (sum + prev)
-                    })
-                  }</h2>
-                </div>
+              <div className="values-container">
+                <span
+                  className="show-button"
+                  onClick={this.handleShowDeckValues}>
+                  +
+                  </span>
+                <h1>
+                  &nbsp;&nbsp;&nbsp;Deck Values</h1>
+                <span className="values-display-wrapper">
+                  <div className="value-wrapper">
+                    <h2>hStone Value: {
+                      this.state.userCalculationsArray.map((cardObject, index) => {
+                        return cardObject.valueCalculation
+                      }).reduce((sum, prev) => {
+                        return (sum + prev)
+                      })
+                    }</h2>
+                  </div>
 
-                <div className="value-wrapper">
-                  <h2>Dollar Value: ${
-                    this.state.userCalculationsArray.map((cardObject, index) => {
-                      return cardObject.rarityCalculation
-                    }).reduce((sum, prev) => {
-                      return Number.parseFloat(sum + prev * Math.random() * (.5 + .1) + .1).toFixed(2)
-                    })
-                  }</h2>
-                </div>
+                  <div className="value-wrapper">
+                    <h2>Dollar Value: ${
 
-                <div className="value-wrapper">
-                  <h2>Win Rate Value: {
-                    this.state.winRateCalculate
-                  }%</h2>
-                </div>
+                      this.state.dollarValueCalculate
+                    }</h2>
+                  </div>
 
-                <div className="value-wrapper">
-                  <h2>Rarity Value: {
-                    this.state.userCalculationsArray.map((cardObject, index) => {
-                      return cardObject.rarityCalculation
-                    }).reduce((sum, prev) => {
-                      return (sum + prev)
-                    })
-                  }</h2>
-                </div>
+                  <div className="value-wrapper">
+                    <h2>Win Rate Value: {
+                      this.state.winRateCalculate
+                    }%</h2>
+                  </div>
 
+                  <div className="value-wrapper">
+                    <h2>Rarity Value: {
+                      this.state.userCalculationsArray.map((cardObject, index) => {
+                        return cardObject.rarityCalculation
+                      }).reduce((sum, prev) => {
+                        return (sum + prev)
+                      })
+                    }</h2>
+                  </div>
+                </span>
               </div>
 
               :
@@ -722,8 +784,14 @@ export default class Homepage extends Component {
             this.state.userDeck.length !== 0
               ?
               <div className="results-your-collection-container">
-                <h4 className="collection-title">Your Collection</h4>
-                <ul className="result-list">
+                <span
+                  className="show-button"
+                  onClick={this.handleShowUserCollection}>
+                  +
+                  </span>
+                <h4 className="collection-title">
+                  &nbsp;&nbsp;&nbsp;Your Collection</h4>
+                <ul className="result-list user-collection-show">
                   {
                     this.state.userDeck.map((result, index) => {
                       return (
@@ -766,34 +834,35 @@ export default class Homepage extends Component {
                 <h4 className="search-results-title">Search Results</h4>
 
                 <ul className="result-list">
-                  {this.state.returnVal.map((result, index) => {
-                    return (
-                      <li key={result.name + index}>
-                        <h4>{result.name}</h4>
-                        {
-                          <img
-                            src={result.img ? result.img : this.state.imgError}
-                            key={result.cardId + index}
-                            alt={result.name}
-                            cardname={result.name}
-                            race={result.race}
-                            cost={result.cost}
-                            health={result.health}
-                            attack={result.attack}
-                            rarity={result.rarity}
-                            set={result.cardSet}
-                            onClick={this.handleClick}
-                            onError={(e) => {
-                              this.handleImageError(e)
-                              e.target.src = this.state.imgError;
-                            }
-                            } />
-                        }
-                        <p>Set: {result.cardSet}</p>
-                        <p>Rarity: {result.rarity ? result.rarity : "Non Collectable"}</p>
-                      </li>
-                    )
-                  })
+                  {
+                    this.state.returnVal.map((result, index) => {
+                      return (
+                        <li key={result.name + index}>
+                          <h4>{result.name}</h4>
+                          {
+                            <img
+                              src={result.img ? result.img : this.state.imgError}
+                              key={result.cardId + index}
+                              alt={result.name}
+                              cardname={result.name}
+                              race={result.race}
+                              cost={result.cost}
+                              health={result.health}
+                              attack={result.attack}
+                              rarity={result.rarity}
+                              set={result.cardSet}
+                              onClick={this.handleClick}
+                              onError={(e) => {
+                                this.handleImageError(e)
+                                e.target.src = this.state.imgError;
+                              }
+                              } />
+                          }
+                          <p>Set: {result.cardSet}</p>
+                          <p>Rarity: {result.rarity ? result.rarity : "Non Collectable"}</p>
+                        </li>
+                      )
+                    })
                   }
                 </ul>
               </div>

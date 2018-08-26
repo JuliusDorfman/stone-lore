@@ -2,8 +2,8 @@
   display: inline-block;
   padding: 1%;
   border-radius: 12px;
-  background: rgba(243, 187, 90, .3);
-  border: 1px solid rgba(112, 57, 18);
+  background: rgb(255, 225, 195);
+  border: 1px solid rgba(112, 57, 18, 1);
 }
 
 .form-container>h4 {
@@ -28,17 +28,20 @@ form {
 
 .form-button>.hearthstone-button-image {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   height: 60px;
 }
 
-.form-button > button {
-  margin: 6px 0 0 5px;
-  padding: 5% 7%;
+.form-button>button {
+  position: absolute;
+  margin: 3px 0 0 8px;
+  transform: rotate(-2deg);
+  padding: 15px 15px;
   background: transparent;
   border: none;
   color: rgb(123, 60, 31);
   font-weight: 900;
+  z-index: 1000;
 }
 
 .homepage-landing-header>h1 {
@@ -50,7 +53,7 @@ form {
 .instructions {
   display: inline-block;
   color: rgba(120, 20, 5, 1);
-  background: rgba(243, 187, 90, .3);
+  background: rgb(255, 225, 195);
   border: 1px solid rgba(112, 57, 18);
   border-radius: 12px;
   padding: 1%;
@@ -66,8 +69,10 @@ form {
 
 .show-button {
   cursor: pointer;
+  position: absolute;
   font-size: 17px;
-  animation: rotateForty .75s infinite linear;
+  transition: .75s;
+  color: rgba(130, 39, 15, 1);
 }
 
 .search-form {
@@ -81,7 +86,7 @@ form {
 
 .search-form>input,
 select {
-  border: 2px inset #EBE9ED;
+  border: 2px inset rgba(255, 230, 230, 1);
   background: rgba(253, 249, 243, 1);
   color: rgba(130, 39, 15, 1);
 }
@@ -109,7 +114,7 @@ select {
   justify-content: center;
   align-content: center;
   padding: 0;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .result-list>li {
@@ -142,6 +147,12 @@ select {
 
 .user-collection-list-item {
   color: mediumblue;
+  font-weight: 700;
+}
+
+.minimum-warning {
+  color: red;
+  font-size: 40px;
 }
 
 /* User Collection */
@@ -154,7 +165,7 @@ select {
   right: 0;
   width: 120px;
   border: 1px solid rgba(112, 57, 18);
-  background: rgba(243, 187, 90, .3);
+  background: rgba(255, 225, 195, .7);
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
 }
@@ -172,6 +183,7 @@ select {
 
 .user-collection>p {
   text-align: center;
+  font-weight: 700;
   color: rgba(130, 49, 20, 1);
   border-bottom: 1px solid rgba(112, 57, 18);
   margin: 7px 0 0 0;
@@ -219,9 +231,10 @@ select {
 }
 
 .results-your-collection-container {
-  border-radius: 12px;
+  padding: 1%;
   background: rgba(167, 81, 50, 0.3);
   border: 1px solid rgba(112, 57, 18);
+  border-radius: 12px;
 }
 
 /* Spinner */
