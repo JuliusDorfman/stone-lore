@@ -9,7 +9,7 @@ export default class Homepage extends Component {
     super(props);
     this.state = {
       loadingData: false,
-      showInstructions: true,
+      showInstructions: false,
       showForm: true,
       showDeckValues: true,
       showUserCollection: true,
@@ -627,7 +627,7 @@ export default class Homepage extends Component {
         <Header />
         <div className="deck-component">
           <div className="user-collection">
-            <p>Your Collection</p>
+            <p>Deck Tracker</p>
             <ul className="user-collection-list">
               {this.state.userCollection.map(
                 (card, index) => {
@@ -645,18 +645,20 @@ export default class Homepage extends Component {
             </ul>
             <div className="card-count">
               <p>Cards: {this.state.userCollection.length}/30</p>
-              <button onClick={this.handleCollectionSubmit}>Submit Selection</button>
-              <button onClick={this.handleCollectionReset}>Reset Selection</button>
+              <div className="user-collection-button">
+                <img className="hearthstone-button-image" src="/assets/images/hearthstone-button-template.png" alt="button" />
+                <button onClick={this.handleCollectionSubmit}>Submit</button>
+              </div>
+              <div className="user-collection-button">
+                <img className="hearthstone-button-image" src="/assets/images/hearthstone-button-template.png" alt="button" />
+                <button onClick={this.handleCollectionReset}>Clear</button>
+              </div>
             </div>
           </div>
         </div>
 
         <div className="container homepage-landing-header">
-          <h1>hStone</h1>
-          <p className="homepage-landing-intro">Crush your Hearthstone Addiction</p>
-        </div>
 
-        <div className="container">
           <div className="instructions">
             <span
               className="show-button"
@@ -668,20 +670,23 @@ export default class Homepage extends Component {
           </h4>
             <span className="instructions-detail">
               <p>1. Search (No Fields Are Required)</p>
-              <p>2. Choose 30 cards</p>
-              <p>3. Click Submit at Bottom of Deck Tracker</p>
+              <p>2. Choose a minimum of 10 cards</p>
+              <p>3. Click Submit button at bottom of Deck Tracker</p>
             </span>
           </div>
+
+          <h1>hStone</h1>
+          <p className="homepage-landing-intro">Crush your Hearthstone Addiction</p>
         </div>
         {
           this.state.loadingData
             ?
             <div className="loading-component">
               <p>Loading (Up to 30 seconds)</p>
-              <img className="loading-spinner" src="/assets/images/hstone-logo.png" alt="site-logo" style={{ height: "150px", width: "150px" }} />
+              <img className="loading-spinner" src="/assets/images/loading-spinner.png" alt="site-logo" style={{ height: "150px", width: "150px" }} />
             </div>
             :
-            <div className="container">
+            <div className="info-container">
               <div className="form-container">
                 <span
                   className="show-button"
@@ -718,66 +723,67 @@ export default class Homepage extends Component {
                   <div />
                   <span className="form-button">
                     <img className="hearthstone-button-image" src="/assets/images/hearthstone-button-template.png" alt="button" />
-                    <button type="submit" name="search" value="Submit" onClick={this.handleSubmit}>Submit</button>
+                    <button type="submit" name="search" value="Submit" onClick={this.handleSubmit}>Search</button>
                   </span>
                 </form>
               </div>
+              <span>
+                {
+                  this.state.userCalculationsArray.length !== 0 ?
+
+                    <div className="values-container">
+                      <span
+                        className="show-button"
+                        onClick={this.handleShowDeckValues}>
+                        +
+                      </span>
+                      <h1>
+                        &nbsp;&nbsp;&nbsp;Deck Values</h1>
+                      <span className="values-display-wrapper">
+                        <div className="value-wrapper">
+                          <h2>hStone Value: {
+                            this.state.userCalculationsArray.map((cardObject, index) => {
+                              return cardObject.valueCalculation
+                            }).reduce((sum, prev) => {
+                              return (
+                                sum + prev
+                              )
+                            })
+                          }</h2>
+                        </div>
+
+                        <div className="value-wrapper">
+                          <h2>Dollar Value: ${
+                            this.state.dollarValueCalculate
+                          }</h2>
+                        </div>
+
+                        <div className="value-wrapper">
+                          <h2>Win Rate Value: {
+                            this.state.winRateCalculate
+                          }%</h2>
+                        </div>
+
+                        <div className="value-wrapper">
+                          <h2>Rarity Value: {
+                            this.state.userCalculationsArray.map((cardObject, index) => {
+                              return cardObject.rarityCalculation
+                            }).reduce((sum, prev) => {
+                              return (sum + prev)
+                            })
+                          }</h2>
+                        </div>
+                      </span>
+                    </div>
+                    :
+                    <span />
+                }
+              </span>
             </div>
         }
+
         <div className="container">
           {this.state.minimumMessage}
-        </div>
-        <div className="container">
-          {
-            this.state.userCalculationsArray.length !== 0 ?
-
-              <div className="values-container">
-                <span
-                  className="show-button"
-                  onClick={this.handleShowDeckValues}>
-                  +
-                  </span>
-                <h1>
-                  &nbsp;&nbsp;&nbsp;Deck Values</h1>
-                <span className="values-display-wrapper">
-                  <div className="value-wrapper">
-                    <h2>hStone Value: {
-                      this.state.userCalculationsArray.map((cardObject, index) => {
-                        return cardObject.valueCalculation
-                      }).reduce((sum, prev) => {
-                        return (sum + prev)
-                      })
-                    }</h2>
-                  </div>
-
-                  <div className="value-wrapper">
-                    <h2>Dollar Value: ${
-
-                      this.state.dollarValueCalculate
-                    }</h2>
-                  </div>
-
-                  <div className="value-wrapper">
-                    <h2>Win Rate Value: {
-                      this.state.winRateCalculate
-                    }%</h2>
-                  </div>
-
-                  <div className="value-wrapper">
-                    <h2>Rarity Value: {
-                      this.state.userCalculationsArray.map((cardObject, index) => {
-                        return cardObject.rarityCalculation
-                      }).reduce((sum, prev) => {
-                        return (sum + prev)
-                      })
-                    }</h2>
-                  </div>
-                </span>
-              </div>
-
-              :
-              <span />
-          }
         </div>
         <div className="container img-container ">
           {
@@ -831,8 +837,7 @@ export default class Homepage extends Component {
             this.state.returnVal.length !== 0
               ?
               <div className="results-container">
-                <h4 className="search-results-title">Search Results</h4>
-
+                <h4 className="search-results-title">&nbsp;&nbsp;&nbsp;Search Results</h4>
                 <ul className="result-list">
                   {
                     this.state.returnVal.map((result, index) => {

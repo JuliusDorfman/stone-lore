@@ -1,12 +1,13 @@
 html {
   height: 100vh;
-  background: url('/assets/images/hearthstone-bg.jpg');
+  /* background: url('/assets/images/hearthstone-bg.jpg'); */
+  background: whitesmoke;
   background-size: cover;
   background-attachment: fixed;
 }
 
 .container {
   display: block;
-  margin: 30px 160px 30px 80px;
+  margin: 30px 160px 30px 40px;
 }
 

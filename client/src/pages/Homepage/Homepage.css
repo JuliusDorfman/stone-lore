@@ -1,9 +1,17 @@
+
+.info-container {
+  margin: 30px 160px 30px 40px; 
+  display: flex;
+  justify-content: space-around;
+}
+
 .form-container {
   display: inline-block;
   padding: 1%;
   border-radius: 12px;
   background: rgb(255, 225, 195);
   border: 1px solid rgba(112, 57, 18, 1);
+  height: 100%;
 }
 
 .form-container>h4 {
@@ -19,6 +27,20 @@ form {
 
 .homepage-landing-header {
   color: rgba(90, 49, 20, 1);
+  margin: 12px 0 58px 0;
+}
+
+.homepage-landing-header>* {
+  margin: 0;
+}
+
+.homepage-landing-header>h1 {
+  font-family: 'Uncial Antiqua', cursive;
+  text-align: center;
+  font-size: 70px;
+}
+
+.homepage-landing-header>p {
   text-align: center;
 }
 
@@ -34,29 +56,32 @@ form {
 
 .form-button>button {
   position: absolute;
-  margin: 3px 0 0 8px;
+  margin: 4px 0 0 9px;
   transform: rotate(-2deg);
   padding: 15px 15px;
   background: transparent;
   border: none;
   color: rgb(123, 60, 31);
   font-weight: 900;
-  z-index: 1000;
-}
-
-.homepage-landing-header>h1 {
-  font-family: 'Uncial Antiqua', cursive;
-  font-size: 70px;
-  margin: 24px;
 }
 
 .instructions {
   display: inline-block;
+  position: absolute;
+  text-align: left;
   color: rgba(120, 20, 5, 1);
   background: rgb(255, 225, 195);
   border: 1px solid rgba(112, 57, 18);
   border-radius: 12px;
   padding: 1%;
+  margin-left: 40px;
+}
+.instructions-detail {
+  display: none;
+}
+
+.instructions-detail>* {
+  text-align: left;
 }
 
 .instructions>p {
@@ -107,6 +132,11 @@ select {
   border-radius: 12px;
   background: rgba(243, 187, 90, .3);
   border: 1px solid rgba(112, 57, 18);
+  padding: 1%;
+}
+
+.results-container>h4 {
+  text-align: left
 }
 
 .result-list {
@@ -160,9 +190,9 @@ select {
 .deck-component {
   display: absolute;
   position: fixed;
-  top: 75px;
-  height: 80vh;
+  height: 90vh;
   right: 0;
+  margin-top: 12px;
   width: 120px;
   border: 1px solid rgba(112, 57, 18);
   background: rgba(255, 225, 195, .7);
@@ -190,7 +220,7 @@ select {
 }
 
 .collection-title {
-  text-align: center;
+  text-align: left;
   color: rgba(130, 49, 20, 1);
   font-size: 32px;
   margin: 0;
@@ -221,13 +251,36 @@ select {
 }
 
 .card-count {
-  text-align: center;
   border-top: 1px solid rgba(112, 57, 18);
 }
 
 .card-count>p {
+  text-align: center;
   color: rgba(130, 49, 20, 1);
   margin: auto;
+}
+
+.user-collection-button {
+  display: flex;
+  justify-content: center;
+  height: 50px;
+}
+
+.user-collection-button>.hearthstone-button-image {
+  position: absolute;
+  height: 50px;
+  width: 100px;
+  padding-top: 2px;
+  z-index: -1;
+}
+
+.user-collection-button>button {
+  background: transparent;
+  border: none;
+  color: rgba(130, 49, 20, 1);
+  transform: rotate(-2deg);
+  font-weight: 900;
+  top: -2px;
 }
 
 .results-your-collection-container {
@@ -235,6 +288,10 @@ select {
   background: rgba(167, 81, 50, 0.3);
   border: 1px solid rgba(112, 57, 18);
   border-radius: 12px;
+}
+
+.results-your-collection-container>h4 {
+  display: inline-block;
 }
 
 /* Spinner */
@@ -265,21 +322,31 @@ select {
 }
 
 .values-container {
+  display: inline-block;
   padding: 1%;
-  margin-bottom: 100px;
   border-radius: 3px;
   color: rgba(90, 49, 20, 1);
+  width: 400px;
   border: 1px solid rgba(112, 57, 18);
   background: rgba(243, 187, 90, .3);
+}
+
+.values-container>h1 {
+  margin: 0;
 }
 
 .value-wrapper {
   display: inline-block;
   margin: 12px;
   padding: 1%;
+  min-width: 90%;
   border-radius: 3px;
   border: 1px solid rgba(112, 57, 18);
   background: rgba(243, 187, 90, .3);
+}
+
+.value-wrapper>h2 {
+  margin: 12px auto;
 }
 
 @keyframes rotateForty {
