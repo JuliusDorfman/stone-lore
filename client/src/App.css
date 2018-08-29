@@ -1,7 +1,7 @@
 html {
   height: 100vh;
-  /* background: url('/assets/images/hearthstone-bg.jpg'); */
-  background: whitesmoke;
+  background: url('/assets/images/hearthstone-bg.jpg');
+  /* background: whitesmoke; */
   background-size: cover;
   background-attachment: fixed;
 }
