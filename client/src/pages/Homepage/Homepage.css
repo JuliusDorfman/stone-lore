@@ -1,8 +1,7 @@
-
 .info-container {
-  margin: 30px 160px 30px 40px; 
+  margin: 30px 160px 30px 40px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .form-container {
@@ -76,11 +75,13 @@ form {
   padding: 1%;
   margin-left: 40px;
 }
+
 .instructions-detail {
   display: none;
 }
 
 .instructions-detail>* {
+  margin: 5px;
   text-align: left;
 }
 
@@ -128,6 +129,16 @@ select {
   color: rgba(164, 69, 30, .6);
 }
 
+.hstone-picture-wrapper {
+  display: flex;
+  height: 300px;
+  justify-content: flex-end;
+}
+
+.hstone-picture-wrapper>img {
+  height: 100%;
+}
+
 .results-container {
   border-radius: 12px;
   background: rgba(243, 187, 90, .3);
@@ -172,7 +183,10 @@ select {
 }
 
 .result-list p {
-  margin: 10px auto;
+  display: block;
+  margin: auto;
+  width: 60%;
+  border-radius: 12px;
 }
 
 .user-collection-list-item {
@@ -316,6 +330,7 @@ select {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -353,6 +368,7 @@ select {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(90deg);
   }

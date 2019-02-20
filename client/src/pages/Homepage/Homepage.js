@@ -669,7 +669,7 @@ export default class Homepage extends Component {
               &nbsp;&nbsp;&nbsp;Instructions
           </h4>
             <span className="instructions-detail">
-              <p>1. Search (No Fields Are Required)</p>
+              <p>1. Search (No required fields)</p>
               <p>2. Choose a minimum of 10 cards</p>
               <p>3. Click Submit button at bottom of Deck Tracker</p>
             </span>
@@ -716,7 +716,7 @@ export default class Homepage extends Component {
                     <option value="Classic">Classic</option>
                     <option value="Journey to Un'Goro">Journey to Un'Goro</option>
                     <option value="Knights of the Frozen Throne">Knights of the Frozen Throne</option>
-                    <option value="Kobolds & Catacombs">Kobolds & Catacombs</option>
+                    <option value="Kobolds & Catacombs">Kobolds &amp; Catacombs</option>
                     <option value="The Witchwood">The Witchwood</option>
                     <option value="The Boomsday Project">The Boomsday Project</option>
                   </select>
@@ -727,6 +727,11 @@ export default class Homepage extends Component {
                   </span>
                 </form>
               </div>
+              
+              <div className="hstone-picture-wrapper">
+                <img src="/assets/images/murloc.png" alt="hstone-murloc" />
+              </div>
+
               <span>
                 {
                   this.state.userCalculationsArray.length !== 0 ?
