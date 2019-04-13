@@ -15,14 +15,13 @@ You will create a deck from current meta and this application will output your e
 ##Hearthstone: 
 
 ###Included Standard Card Set Only:
-Updated: 07/31/2018
+Updated: 04/13/2019
  - Basic
  - Classic
- - Journey to Un'Goro
- - Knights of the Frozen Throne
- - Kobolds & Catacombs
  - The Witchwood
  - The Boomsday Project
+ - Rastakhan's Rumble
+ - Rise of Shadows
 
 ###NO LONGER INCLUDED:
  - Naxxramas	
@@ -34,6 +33,10 @@ Updated: 07/31/2018
  - One Night in Karazhan
  - Mean Streets of Gadgetzan
  - Hall of Fame
+ - Journey to Un'Goro
+ - Knights of the Frozen Throne
+ - Kobolds & Catacombs
+
 
 ##[Future Games to be decided]
 
@@ -71,4 +74,5 @@ Updated: 07/31/2018
  - Ave Gold earned per completed quest = 70
  - Total Ave Gold earned a day = 100
 
-
+##For Developers
+ - To start locally run "yarn dev"

@@ -714,11 +714,10 @@ export default class Homepage extends Component {
                     <option placeholder="Optional">Optional</option>
                     <option value="Basic">Basic</option>
                     <option value="Classic">Classic</option>
-                    <option value="Journey to Un'Goro">Journey to Un'Goro</option>
-                    <option value="Knights of the Frozen Throne">Knights of the Frozen Throne</option>
-                    <option value="Kobolds & Catacombs">Kobolds &amp; Catacombs</option>
                     <option value="The Witchwood">The Witchwood</option>
                     <option value="The Boomsday Project">The Boomsday Project</option>
+                    <option value="Rastakhan's Rumble">Rastakhan's Rumble</option>
+                    <option value="Rise of Shadows">Rise of Shadows</option>
                   </select>
                   <div />
                   <span className="form-button">
@@ -727,7 +726,7 @@ export default class Homepage extends Component {
                   </span>
                 </form>
               </div>
-              
+
               <div className="hstone-picture-wrapper">
                 <img src="/assets/images/murloc.png" alt="hstone-murloc" />
               </div>
