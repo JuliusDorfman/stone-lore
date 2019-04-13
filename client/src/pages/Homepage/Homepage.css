@@ -373,3 +373,52 @@ select {
     transform: rotate(90deg);
   }
 }
+
+@media (max-width: 700px) {
+  .deck-component {
+    background: rgba(255, 225, 195, 1);
+    width: 70px;
+  }
+
+  .user-collection-button>.hearthstone-button-image {
+    width: 60px;
+  }
+
+  .user-collection-list {
+    overflow: auto;
+  }
+
+  .user-collection-list>li>p {
+    font-size: 12px;
+  }
+
+  .user-collection-list>li {
+    text-align: center;
+  }
+
+  .info-container {
+    margin: initial;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .hstone-picture-wrapper {
+    position: absolute;
+    top: 10vh;
+    height: 100px;
+  }
+
+  .instructions {
+    z-index: 1;
+    position: relative;
+  }
+
+  .img-container {
+    margin: 30px 120px 30px 40px;
+  }
+
+  .result-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
