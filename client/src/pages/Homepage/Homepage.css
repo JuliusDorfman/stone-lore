@@ -378,10 +378,29 @@ select {
   .deck-component {
     background: rgba(255, 225, 195, 1);
     width: 70px;
+    height: 60vh;
   }
 
   .user-collection-button>.hearthstone-button-image {
     width: 60px;
+  }
+
+  .homepage-landing-header>h1 {
+    font-size: 50px;
+  }
+
+  .user-collection-button>button {
+    font-size: 10px;
+  }
+
+  .form-button>.hearthstone-button-image {
+    width: 80px;
+    height: initial;
+  }
+
+  .form-button>.search-criteria-submit {
+    font-size: 10px;
+    margin: 0 0 0 4px;
   }
 
   .user-collection-list {
@@ -404,8 +423,8 @@ select {
 
   .hstone-picture-wrapper {
     position: absolute;
-    top: 10vh;
-    height: 100px;
+    top: 15vh;
+    height: 80px;
   }
 
   .instructions {
@@ -421,4 +440,29 @@ select {
     grid-template-columns: 1fr 1fr;
   }
 
+  .form-container {
+    width: 300px;
+  }
+
+  .search-form {
+    width: 275px;
+  }
+
+  .search-form>label {
+    font-size: 12px;
+  }
+
+  .search-form>input,
+  select {
+    font-size: 12px;
+  }
+
+  .values-container {
+    width: 300px;
+    margin-bottom: 30px;
+  }
+
+  .loading-component>p {
+    font-size: 20px;
+  }
 }

@@ -651,7 +651,7 @@ export default class Homepage extends Component {
               </div>
               <div className="user-collection-button">
                 <img className="hearthstone-button-image" src="/assets/images/hearthstone-button-template.png" alt="button" />
-                <button onClick={this.handleCollectionReset}>Clear</button>
+                <button onClick={this.handleCollectionReset}>Reset</button>
               </div>
             </div>
           </div>
@@ -665,7 +665,9 @@ export default class Homepage extends Component {
               onClick={this.handleShowInstructions}>
               +
             </span>
-            <h4>
+            <h4
+              onClick={this.handleShowInstructions}
+            >
               &nbsp;&nbsp;&nbsp;Instructions
           </h4>
             <span className="instructions-detail">
@@ -693,7 +695,9 @@ export default class Homepage extends Component {
                   onClick={this.handleShowForm}>
                   +
                   </span>
-                <h4>
+                <h4
+                  onClick={this.handleShowForm}
+                >
                   &nbsp;&nbsp;&nbsp;Card Search
                 </h4>
                 <form id="hstone-search" className="search-form">
@@ -722,7 +726,7 @@ export default class Homepage extends Component {
                   <div />
                   <span className="form-button">
                     <img className="hearthstone-button-image" src="/assets/images/hearthstone-button-template.png" alt="button" />
-                    <button type="submit" name="search" value="Submit" onClick={this.handleSubmit}>Search</button>
+                    <button className="search-criteria-submit" type="submit" name="search" value="Submit" onClick={this.handleSubmit}>Search</button>
                   </span>
                 </form>
               </div>
@@ -738,10 +742,11 @@ export default class Homepage extends Component {
                     <div className="values-container">
                       <span
                         className="show-button"
-                        onClick={this.handleShowDeckValues}>
+                      >
                         +
                       </span>
-                      <h1>
+                      <h1
+                        onClick={this.handleShowDeckValues}>
                         &nbsp;&nbsp;&nbsp;Deck Values</h1>
                       <span className="values-display-wrapper">
                         <div className="value-wrapper">
@@ -799,8 +804,11 @@ export default class Homepage extends Component {
                   onClick={this.handleShowUserCollection}>
                   +
                   </span>
-                <h4 className="collection-title">
-                  &nbsp;&nbsp;&nbsp;Your Collection</h4>
+                <h4 className="collection-title"
+                  onClick={this.handleShowUserCollection}
+                >
+                  &nbsp;&nbsp;&nbsp;Your Collection
+                  </h4>
                 <ul className="result-list user-collection-show">
                   {
                     this.state.userDeck.map((result, index) => {
